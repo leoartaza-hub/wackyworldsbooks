@@ -37,7 +37,8 @@ h2.section-title{margin:0;font-family:'Lilita One',sans-serif;font-weight:400;fo
 .promo a{color:var(--yellow)}
 header.site{background:var(--teal);color:var(--cream)}
 .header-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
-.header-row .logo img{height:52px;width:auto}
+.header-row .logo{align-self:flex-start;margin-top:-12px;margin-bottom:-22px;position:relative;z-index:2}
+.header-row .logo img{height:84px;width:auto;filter:drop-shadow(0 4px 6px rgba(0,0,0,.18))}
 nav.main{display:flex;gap:4px;flex-wrap:wrap;flex:1 1 auto}
 nav.main a{color:var(--cream);text-decoration:none;font-weight:800;font-size:16px;padding:12px 14px;border-radius:10px}
 nav.main a:hover{background:rgba(255,255,255,.1);color:#fff}
@@ -186,6 +187,8 @@ footer.site{background:var(--ink);color:var(--cream)}
 
 @media (max-width:640px){
   .header-row{gap:12px}
+  .header-row .logo{margin-bottom:-8px}
+  .header-row .logo img{height:64px}
   nav.main{order:3;flex-basis:100%}
   .header-actions{margin-left:auto}
   .club{padding:28px 22px}
@@ -202,7 +205,7 @@ footer.site{background:var(--ink);color:var(--cream)}
 
 <header class="site">
   <div class="wrap header-row">
-    <a class="logo" href="#top" aria-label="Wacky Worlds Books home"><img src="assets/logo.png" alt="Wacky Worlds" width="167" height="52"></a>
+    <a class="logo" href="#top" aria-label="Wacky Worlds Books home"><img src="assets/logo-badge.png" alt="Wacky Worlds" width="140" height="84"></a>
     <nav class="main" aria-label="Main">
       <a href="#books">Books</a>
       <a href="#characters">Characters</a>
