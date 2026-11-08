@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your free gift · Wacky Worlds Books</title>
+<meta name="description" content="A free gift for parents of young pilots from Wacky Worlds Books. Leave your email and we'll send it straight to your inbox.">
+<meta property="og:title" content="A free gift for your young pilot · Wacky Worlds Books">
+<meta property="og:image" content="https://wackyworldsbooks.com/assets/certificate-preview.jpg">
+<meta property="og:url" content="https://wackyworldsbooks.com/gift/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/gift/gift.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Wacky Worlds Books home"><img src="/assets/logo-badge.png" alt="Wacky Worlds" width="140" height="84"></a>
+    <a class="home" href="/">Visit the website</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap gift-row">
+    <div class="gift-img">
+      <img src="/assets/certificate-preview.jpg" alt="The Official Space Pilot certificate from Wacky Worlds, with a space for your child's name" width="900" height="1181">
+    </div>
+    <div class="gift-text">
+      <span class="chip">FREE GIFT FOR PARENTS</span>
+      <h1>A free gift for your young pilot</h1>
+      <p class="lead">Thanks for flying with SUM-IX! Leave your email and we'll send you the <strong>Official Space Pilot Certificate</strong>: print it, write your child's name and celebrate every mission completed.</p>
+      <ul class="perks">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Free printable PDF, sent straight to your inbox</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>For grown-ups: we only ask for a parent's email</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>No spam. Unsubscribe with one click, anytime</li>
+      </ul>
+
+      <!-- Brevo double opt-in form "Gift QR Book 01" (list: Gift - Book 01 QR).
+           After submit Brevo redirects to /gift/check-your-email/, after confirming to /gift/confirmed/. -->
+      <form class="optin" id="gift-form" method="POST" action="https://754aff81.sibforms.com/serve/MUIFACq81IItwU0ixYFer8_ORdSlTpKhnN0CdOeDyHRhl-xE_uTJitiQzfZLEuliqnyDFiyjoYk9xh7v4PDNVWKSEGkNeijhB4SXy2VHGH3Ze945hEQC0q9TetqwKiKpxUvE2U5zaLJkpXzD9CxN3DK40ezoqk8h56L4CSk0fJLfs8tE0GDts8hhLa9m8FLJsca-mLsnuuu5t6IHdQ==" novalidate>
+        <label class="field" for="gift-email">Parent's email</label>
+        <input id="gift-email" name="EMAIL" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <label class="consent">
+          <input type="checkbox" id="gift-consent" name="OPT_IN" value="1" required>
+          <span>I'm a parent or guardian over 18 and I agree to receive emails from Wacky Worlds Books. I can unsubscribe anytime. Read our <a href="/privacy/">privacy policy</a>.</span>
+        </label>
+        <!-- Brevo anti-spam field: must stay empty and hidden -->
+        <input type="text" name="email_address_check" value="" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="locale" value="en">
+        <input type="hidden" name="html_type" value="simple">
+        <button type="submit" id="gift-submit">Send me the gift</button>
+        <span class="note" id="gift-note" role="alert"></span>
+        <p class="small">We'll first send you a quick email to confirm it's really you.</p>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Wacky Worlds Books · wackyworldsbooks.com</span>
+    <a href="/privacy/">Privacy</a>
+  </div>
+</footer>
+
+<script>
+// Checks the fields before sending them to Brevo, which then redirects to /gift/check-your-email/
+(function () {
+  var form = document.getElementById('gift-form');
+  var note = document.getElementById('gift-note');
+  var button = document.getElementById('gift-submit');
+  form.addEventListener('submit', function (e) {
+    var email = document.getElementById('gift-email');
+    var consent = document.getElementById('gift-consent');
+    if (!email.value || !email.checkValidity()) { e.preventDefault(); note.textContent = 'Please enter a valid email address.'; email.focus(); return; }
+    if (!consent.checked) { e.preventDefault(); note.textContent = 'Please tick the box so we can email you.'; consent.focus(); return; }
+    note.textContent = '';
+    button.disabled = true;
+    button.textContent = 'Sending…';
+  });
+  // If the visitor comes back with the browser's Back button, re-enable the button
+  window.addEventListener('pageshow', function () { button.disabled = false; button.textContent = 'Send me the gift'; });
+})();
+</script>
+</body>
+</html>
