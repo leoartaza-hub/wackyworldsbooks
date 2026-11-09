@@ -222,6 +222,34 @@ html.motion .rv.in > *{opacity:1;transform:none;transition:opacity 450ms var(--e
 }
 @keyframes fade-in{from{opacity:0}to{opacity:1}}
 
+/* ---------- Site search ---------- */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+html:has(.search[open]){overflow:hidden}
+.search{width:min(640px,94vw);max-width:94vw;margin-top:10vh;padding:0;border:0;border-radius:22px;background:var(--paper);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.4);overflow:hidden}
+.search::backdrop{background:rgba(14,74,71,.72)}
+.search[open]{animation:peek-in 220ms var(--ease-out)}
+.search[open]::backdrop{animation:fade-in 220ms ease}
+.search-bar{display:flex;align-items:center;gap:10px;padding:10px 10px 10px 20px;border-bottom:2px solid var(--line);color:var(--teal)}
+.search-bar input{flex:1;min-width:0;height:48px;border:0;background:transparent;font-family:inherit;font-size:18px;font-weight:700;color:var(--ink);outline:none}
+.search-bar input::placeholder{color:var(--muted);font-weight:600}
+.search-bar input::-webkit-search-cancel-button{display:none}
+.search-close{width:44px;height:44px;border:0;border-radius:22px;background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+.search-close:hover{background:var(--cream)}
+.search-hint{margin:12px 20px 4px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.search-results{list-style:none;margin:0;padding:4px 10px 12px;max-height:min(60vh,520px);overflow-y:auto}
+.search-results a{display:flex;align-items:center;gap:14px;padding:10px 12px;border-radius:14px;text-decoration:none;color:var(--ink)}
+.search-results a:hover,.search-results a[aria-selected="true"]{background:var(--cream)}
+.search-results .ic{flex:none;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:'Lilita One',sans-serif;font-size:18px;color:var(--ink)}
+.search-results .ic img{width:100%;height:100%;object-fit:cover;background:#fff}
+.search-results .txt{display:flex;flex-direction:column;min-width:0}
+.search-results .t{font-weight:800;font-size:16px;line-height:1.3}
+.search-results .d{font-size:13.5px;color:var(--muted);line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-results mark{background:#FBE3A6;color:inherit;border-radius:3px;padding:0 1px}
+.search-results .kind{margin-left:auto;flex:none;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.search-empty{margin:8px 20px 22px;font-size:15px;color:var(--ink-2)}
+@media (max-width:640px){.search{margin-top:4vh}.search-results .kind{display:none}}
+@media (prefers-reduced-motion:reduce){.search[open]{animation-name:fade-in}}
+
 /* ---------- Peek inside (book page viewer) ---------- */
 html:has(.peek[open]){overflow:hidden}
 .peek{width:min(600px,94vw);max-width:94vw;max-height:94vh;padding:0;border:0;border-radius:24px;background:var(--paper);color:var(--ink);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)}
@@ -278,12 +306,12 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       <a href="#characters">Characters</a>
       <a href="#missions">Activities</a>
       <a href="#academy">The Academy</a>
-      <a href="#parents">For Parents</a>
+      <a href="/for-parents/">For Parents</a>
     </nav>
     <div class="header-actions">
-      <a class="icon-btn" href="#books" aria-label="Search books">
+      <button type="button" class="icon-btn" id="search-open" aria-label="Search the site" aria-haspopup="dialog">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-      </a>
+      </button>
       <a class="icon-btn" href="#club" aria-label="Join the Pilot Club">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
       </a>
@@ -323,11 +351,11 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
   </div>
   <div id="panel-chars" role="tabpanel" aria-labelledby="tab-chars">
     <div class="char-grid rv">
-      <a class="char" href="#books"><span class="ring bg-green"><img src="assets/lexi.jpg" alt="Lexi the superhero reading frog" loading="lazy"></span><span class="name">Lexi</span><span class="skill">Letters &amp; words</span></a>
-      <a class="char" href="#books"><span class="ring bg-cyan"><img src="assets/ollix.jpg" alt="Ollix the many-eyed space octopus" loading="lazy"></span><span class="name">Ollix</span><span class="skill">Observation</span></a>
-      <a class="char" href="#books"><span class="ring bg-gold"><img src="assets/astro.jpg" alt="Astro the pirate cosmonaut dog" loading="lazy"></span><span class="name">Astro</span><span class="skill">Mazes &amp; maps</span></a>
-      <a class="char" href="#books"><span class="ring bg-red"><img src="assets/sumix.jpg" alt="SUM-IX the number-loving robot" loading="lazy"></span><span class="name">SUM-IX</span><span class="skill">Numbers &amp; logic</span></a>
-      <a class="char" href="#books"><span class="ring bg-purple"><img src="assets/arti.jpg" alt="Arti the artist unicorn" loading="lazy"></span><span class="name">Arti</span><span class="skill">Colour &amp; creativity</span></a>
+      <a class="char" href="/characters/#lexi"><span class="ring bg-green"><img src="assets/lexi.jpg" alt="Lexi the superhero reading frog" loading="lazy"></span><span class="name">Lexi</span><span class="skill">Letters &amp; words</span></a>
+      <a class="char" href="/characters/#ollix"><span class="ring bg-cyan"><img src="assets/ollix.jpg" alt="Ollix the many-eyed space octopus" loading="lazy"></span><span class="name">Ollix</span><span class="skill">Observation</span></a>
+      <a class="char" href="/characters/#astro"><span class="ring bg-gold"><img src="assets/astro.jpg" alt="Astro the pirate cosmonaut dog" loading="lazy"></span><span class="name">Astro</span><span class="skill">Mazes &amp; maps</span></a>
+      <a class="char" href="/characters/#sum-ix"><span class="ring bg-red"><img src="assets/sumix.jpg" alt="SUM-IX the number-loving robot" loading="lazy"></span><span class="name">SUM-IX</span><span class="skill">Numbers &amp; logic</span></a>
+      <a class="char" href="/characters/#arti"><span class="ring bg-purple"><img src="assets/arti.jpg" alt="Arti the artist unicorn" loading="lazy"></span><span class="name">Arti</span><span class="skill">Colour &amp; creativity</span></a>
     </div>
   </div>
   <div id="panel-skills" role="tabpanel" aria-labelledby="tab-skills" hidden>
@@ -440,7 +468,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
         <span class="kicker">FOR PARENTS</span>
         <h3>Learning without pressure</h3>
         <p>Not a school workbook, and not empty entertainment. Each challenge builds attention, reasoning, language and confidence while your child simply has fun.</p>
-        <a class="btn" href="#books">Why it works</a>
+        <a class="btn" href="/for-parents/">Why it works</a>
       </div>
     </article>
     <article id="academy" class="feature academy">
@@ -449,7 +477,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
         <span class="kicker">THE ACADEMY</span>
         <h3>Where the weirder you are, the better</h3>
         <p>Five doors, five gifts, five unlikely friends. At Crazy Space Academy it doesn't matter where you come from, only who you are.</p>
-        <a class="btn" href="#characters">Meet the students</a>
+        <a class="btn" href="/characters/">Meet the students</a>
       </div>
     </article>
   </div>
@@ -460,7 +488,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
   <div class="more-grid rv">
     <a class="more" href="/mission/"><span class="ic bg-green"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></span><span class="t">Free printable mission</span><span class="b">3 real activity pages from the book to try at home: math, logic and observation.</span><span class="c">Get it free →</span></a>
     <a class="more" href="#books"><span class="ic bg-gold"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></span><span class="t">Pilot Certificate</span><span class="b">Finish every mission and scan the secret QR on the last page of the book to unlock it.</span><span class="c">See the book →</span></a>
-    <a class="more" href="#characters"><span class="ic bg-cyan"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span><span class="t">Meet the five</span><span class="b">Five worlds, five skills, five unlikely friends. Who are you most like?</span><span class="c">Meet them →</span></a>
+    <a class="more" href="/characters/"><span class="ic bg-cyan"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span><span class="t">Meet the five</span><span class="b">Five worlds, five skills, five unlikely friends. Who are you most like?</span><span class="c">Meet them →</span></a>
     <a class="more" href="#club"><span class="ic bg-purple"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l5-3v10l-5-3"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></span><span class="t">Wacky Worlds on video</span><span class="b">Animated stories and read-alongs are on their way.</span><span class="c">Coming soon →</span></a>
   </div>
 </section>
@@ -495,6 +523,21 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
 </section>
 
 </main>
+
+<!-- Site search: everything runs in the browser, nothing is sent anywhere -->
+<dialog class="search" id="search" aria-labelledby="search-title">
+  <h2 id="search-title" class="sr-only">Search Wacky Worlds</h2>
+  <div class="search-bar">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+    <input type="search" id="search-input" placeholder="Search books, characters, activities…" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="search-results" aria-autocomplete="list">
+    <button type="button" class="search-close" id="search-close" aria-label="Close search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <p class="search-hint" id="search-hint">Popular searches</p>
+  <ul class="search-results" id="search-results" role="listbox" aria-label="Search results"></ul>
+  <p class="search-empty" id="search-empty" hidden>No results yet. Try “SUM-IX”, “mazes”, “free” or “certificate”.</p>
+</dialog>
 
 <!-- Peek inside: 8 real pages of Book 01. Images load only when the viewer opens (data-src). -->
 <dialog class="peek" id="peek" aria-labelledby="peek-title">
@@ -536,31 +579,28 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
         <img src="assets/logo.png" alt="Wacky Worlds" loading="lazy" width="180" height="56">
         <p>Stories and activity books where learning feels like play.</p>
         <div class="social">
-          <!-- TODO: put your real profile links here -->
-          <a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg></a>
-          <a href="#" aria-label="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg></a>
-          <a href="#" aria-label="Email us"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+          <a href="/contact/" aria-label="Contact us by email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
         </div>
       </div>
       <nav aria-label="Books">
         <span class="h">BOOKS</span>
         <a href="#books">All books</a>
         <a href="#books">Activity books</a>
-        <a href="#books">Coming soon</a>
+        <a href="#books" data-books-filter="soon">Coming soon</a>
       </nav>
       <nav aria-label="Characters">
         <span class="h">CHARACTERS</span>
-        <a href="#characters">Lexi</a>
-        <a href="#characters">Ollix</a>
-        <a href="#characters">Astro</a>
-        <a href="#characters">SUM-IX</a>
-        <a href="#characters">Arti &amp; Pompita</a>
+        <a href="/characters/#lexi">Lexi</a>
+        <a href="/characters/#ollix">Ollix</a>
+        <a href="/characters/#astro">Astro</a>
+        <a href="/characters/#sum-ix">SUM-IX</a>
+        <a href="/characters/#arti">Arti &amp; Pompita</a>
       </nav>
       <nav aria-label="Help">
         <span class="h">HELP</span>
-        <a href="#free">Free printables</a>
-        <a href="#parents">For parents &amp; teachers</a>
-        <a href="#club">Contact</a>
+        <a href="/mission/">Free printables</a>
+        <a href="/for-parents/">For parents &amp; teachers</a>
+        <a href="/contact/">Contact</a>
       </nav>
     </div>
     <div class="legal">
@@ -687,6 +727,119 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
     peek.querySelector('.peek-cta').addEventListener('click', function () { peek.close(); });
     peek.addEventListener('close', function () { opener.focus({ preventScroll: true }); });
   }
+
+  // Site search: a small built-in index of everything on the site, searched as you type (nothing leaves the browser)
+  (function () {
+    var dlg = document.getElementById('search'), input = document.getElementById('search-input');
+    var list = document.getElementById('search-results'), hint = document.getElementById('search-hint'), empty = document.getElementById('search-empty');
+    var openBtn = document.getElementById('search-open');
+    if (!dlg || typeof dlg.showModal !== 'function' || !openBtn) return;
+    function ic(img, bg, txt) { return { img: img, bg: bg, txt: txt }; }
+    var G = 'var(--green)', C = 'var(--cyan)', Y = 'var(--gold)', R = 'var(--red)', P = 'var(--purple)', O = 'var(--accent)', T = 'var(--cream)';
+    var INDEX = [
+      { t: 'SUM-IX and the Mystery of Pilot Zero', d: 'Book 01 · ages 6–8 · 110 pages · $9.99 paperback', u: '#books', kind: 'Book', i: ic('assets/hero-cover.jpg'), k: 'book 01 sumix sum ix robot buy amazon paperback price logic math secret codes brain games puzzles activity book new libro comprar precio' },
+      { t: 'Lexi and the Treasure of the Crooked Quill', d: 'Book 02 · letters & words · coming soon', u: '#books', kind: 'Book', filter: 'soon', i: ic('assets/lexi.jpg'), k: 'book 02 coming soon next book lexi words letters' },
+      { t: 'Ollix: the book of observation', d: 'Book 03 · in the works', u: '#books', kind: 'Book', filter: 'soon', i: ic('assets/ollix.jpg'), k: 'book 03 coming soon ollix observation' },
+      { t: 'Astro: mazes & exploring', d: 'Book 04 · in the works', u: '#books', kind: 'Book', filter: 'soon', i: ic('assets/astro.jpg'), k: 'book 04 coming soon astro mazes maps' },
+      { t: 'Arti & Pompita: colour & creativity', d: 'Book 05 · in the works', u: '#books', kind: 'Book', filter: 'soon', i: ic('assets/arti.jpg'), k: 'book 05 coming soon arti pompita colouring coloring creativity drawing' },
+      { t: 'Peek inside Book 01', d: 'Flip through 8 real pages of the book', action: 'peek', kind: 'Preview', i: ic('assets/mission-open-1.jpg'), k: 'look inside preview pages sample flip see inside ver dentro paginas hojear' },
+      { t: 'Lexi', d: 'The dreamy storyteller · letters & words', u: '/characters/#lexi', kind: 'Character', i: ic('assets/lexi.jpg'), k: 'frog reading word search crossword rhymes missing letters green' },
+      { t: 'Ollix', d: 'The visual mind · observation', u: '/characters/#ollix', kind: 'Character', i: ic('assets/ollix.jpg'), k: 'octopus eyes spot the difference hidden objects matching turquoise blue' },
+      { t: 'Astro', d: 'The chaotic explorer · mazes & maps', u: '/characters/#astro', kind: 'Character', i: ic('assets/astro.jpg'), k: 'dog saint bernard cosmonaut pirate mazes maps directions paths yellow' },
+      { t: 'SUM-IX', d: 'The math brain · numbers & logic', u: '/characters/#sum-ix', kind: 'Character', i: ic('assets/sumix.jpg'), k: 'sumix sum ix robot numbers counting dot to dot sequences logic codes math red' },
+      { t: 'Arti & Pompita', d: 'The artistic heart · colour & creativity', u: '/characters/#arti', kind: 'Character', i: ic('assets/arti.jpg'), k: 'unicorn pompita colouring coloring drawing art creativity purple' },
+      { t: 'Meet the five', d: 'All the Crazy Space Academy students', u: '/characters/', kind: 'Page', i: ic(null, C, '★'), k: 'characters crew students team' },
+      { t: 'Free printable mission', d: '3 real activity pages to try at home, sent by email', u: '/mission/', kind: 'Free', i: ic('assets/mission-page-1.jpg'), k: 'free printable download pdf sample try gift worksheet gratis gratuito descargar imprimir muestra regalo' },
+      { t: 'Official Space Pilot Certificate', d: 'Unlock it with the secret QR on the last page of the book', u: '/for-parents/', kind: 'Reward', i: ic('assets/certificate-preview.jpg'), k: 'certificate diploma award reward qr pilot certificado premio piloto' },
+      { t: 'For parents & teachers', d: 'How the book works, skills, tips and FAQ', u: '/for-parents/', kind: 'Page', i: ic(null, G, 'P'), k: 'parents teachers classroom school how it works skills tips learning age padres profesores maestros colegio' },
+      { t: 'Join the Pilot Club', d: 'Free activities and news about new books', u: '#club', kind: 'Club', i: ic(null, O, '✉'), k: 'newsletter email sign up subscribe club news suscribirse correo novedades' },
+      { t: 'Contact', d: 'hello@wackyworldsbooks.com', u: '/contact/', kind: 'Page', i: ic(null, Y, '@'), k: 'contact email help support question write contacto ayuda escribir' },
+      { t: 'Crazy Space Academy', d: 'The school floating in the middle of the galaxy', u: '#academy', kind: 'Story', i: ic('assets/academy.jpg'), k: 'academy school space galaxy story world' },
+      { t: 'Privacy & cookies', d: 'How we look after your data', u: '/privacy/', kind: 'Page', i: ic(null, T, 'i'), k: 'privacy policy cookies data gdpr unsubscribe' },
+      { t: 'What age is it for?', d: 'Book 01 is designed for children aged 6 to 8', u: '/for-parents/', kind: 'FAQ', i: ic(null, T, '?'), k: 'age ages years old 5 6 7 8 9 kids edad anos ninos' },
+      { t: 'Are the answers included?', d: 'Yes, all the answers are at the back of the book', u: '/for-parents/', kind: 'FAQ', i: ic(null, T, '?'), k: 'answers solutions key check respuestas soluciones' },
+      { t: 'Does it need screens?', d: 'No: pencil and paper only', u: '/for-parents/', kind: 'FAQ', i: ic(null, T, '?'), k: 'screens screen free tablet app digital pantallas' },
+      { t: "I didn't get my gift email", d: 'Check spam and confirm your email first', u: '/contact/', kind: 'FAQ', i: ic(null, T, '?'), k: 'email not received spam missing gift confirm help' }
+    ];
+    ['Wake the Ship', 'Asteroid Storm', 'Power Meltdown', 'Pilot Training', 'Security Breach', 'Alien Message', 'Chaos Mode', 'Cosmic Journey', 'The Final Code', 'Master Pilot Trial'].forEach(function (m, n) {
+      INDEX.push({ t: 'Mission ' + (n + 1) + ': ' + m, d: '7 challenges inside Book 01', u: '#missions', kind: 'Mission', i: ic(null, [G, C, Y, R, P][n % 5], String(n + 1)), k: 'mission challenge chapter level ' + (n + 1) });
+    });
+    [['Mazes', '/characters/#astro', Y, 'maze labyrinth laberinto laberintos maps mapas'], ['Secret codes', '/characters/#sum-ix', R, 'code codes cipher decode codigos secretos'], ['Word search', '/characters/#lexi', G, 'words letters crossword sopa de letras crucigrama palabras'], ['Spot the difference', '/characters/#ollix', C, 'differences hidden objects diferencias buscar'], ['Colouring', '/characters/#arti', P, 'coloring color colour drawing colorear dibujar pintar'], ['Dot-to-dot', '/characters/#sum-ix', R, 'connect the dots numbers unir puntos numeros']].forEach(function (a) {
+      INDEX.push({ t: a[0], d: 'Activity type in Wacky Worlds books', u: a[1], kind: 'Activity', i: ic(null, a[2], '✎'), k: 'activity puzzle game worksheet actividad juego ' + a[0].toLowerCase() + ' ' + (a[3] || '') });
+    });
+    var POPULAR = [0, 5, 12, 9, 13, 14];
+
+    function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]+/g, ' '); }
+    INDEX.forEach(function (e) { e._t = ' ' + norm(e.t); e._all = ' ' + norm(e.t + ' ' + e.d + ' ' + (e.k || '')); });
+    function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function highlight(text, words) {
+      var out = esc(text); if (!words.length) return out;
+      words.forEach(function (w) { if (w.length < 2) return; var re = new RegExp('(' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'); out = out.replace(re, '<mark>$1</mark>'); });
+      return out;
+    }
+    function search(q) {
+      var words = norm(q).split(' ').filter(Boolean);
+      if (!words.length) return POPULAR.map(function (n) { return INDEX[n]; });
+      return INDEX.map(function (e) {
+        var score = 0;
+        for (var i = 0; i < words.length; i++) {
+          var w = words[i];
+          if (e._all.indexOf(' ' + w) === -1) return null; // match from the start of a word
+          if (e._t.indexOf(' ' + w) === 0) score += 6; else if (e._t.indexOf(' ' + w) !== -1) score += 4; else score += 1;
+        }
+        return { e: e, s: score };
+      }).filter(Boolean).sort(function (a, b) { return b.s - a.s; }).slice(0, 8).map(function (r) { return r.e; });
+    }
+    var results = [], sel = 0;
+    function render() {
+      var q = input.value.trim(), words = norm(q).split(' ').filter(Boolean);
+      results = search(q); sel = 0;
+      hint.textContent = q ? (results.length ? 'Results' : '') : 'Popular searches';
+      hint.hidden = !hint.textContent; empty.hidden = !!results.length;
+      list.innerHTML = results.map(function (e, n) {
+        var icon = e.i.img ? '<span class="ic"><img src="' + e.i.img + '" alt=""></span>' : '<span class="ic" style="background:' + e.i.bg + '">' + e.i.txt + '</span>';
+        return '<li role="none"><a role="option" id="sr-' + n + '" href="' + (e.u || '#') + '" data-n="' + n + '" aria-selected="' + (n === 0) + '">' + icon +
+          '<span class="txt"><span class="t">' + highlight(e.t, words) + '</span><span class="d">' + highlight(e.d, words) + '</span></span><span class="kind">' + e.kind + '</span></a></li>';
+      }).join('');
+      input.setAttribute('aria-activedescendant', results.length ? 'sr-0' : '');
+    }
+    function mark(n) {
+      sel = (n + results.length) % results.length;
+      list.querySelectorAll('a').forEach(function (a, i) { a.setAttribute('aria-selected', i === sel); });
+      var a = document.getElementById('sr-' + sel); if (a) { a.scrollIntoView({ block: 'nearest' }); input.setAttribute('aria-activedescendant', a.id); }
+    }
+    function choose(n, ev) {
+      var e = results[n]; if (!e) return;
+      if (ev) ev.preventDefault();
+      dlg.close();
+      if (e.action === 'peek') { var p = document.getElementById('peek-open'); if (p) p.click(); return; }
+      if (e.filter) { var pill = document.querySelector('#books .pill[data-filter="' + e.filter + '"]'); if (pill) pill.click(); }
+      if (e.u.charAt(0) === '#') {
+        var target = document.querySelector(e.u);
+        if (target) target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+        history.replaceState(null, '', e.u);
+      } else { location.href = e.u; }
+    }
+    openBtn.addEventListener('click', function () { input.value = ''; render(); dlg.showModal(); input.focus(); });
+    document.getElementById('search-close').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', function () { openBtn.focus({ preventScroll: true }); });
+    input.addEventListener('input', render);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); mark(sel + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); mark(sel - 1); }
+      else if (e.key === 'Enter') { choose(sel, e); }
+    });
+    list.addEventListener('click', function (e) { var a = e.target.closest('a[data-n]'); if (a) choose(+a.getAttribute('data-n'), e); });
+  })();
+
+  // Footer "Coming soon" (and similar): jump to the books and apply that filter
+  document.querySelectorAll('[data-books-filter]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var pill = document.querySelector('#books .pill[data-filter="' + a.getAttribute('data-books-filter') + '"]');
+      if (pill) pill.click();
+    });
+  });
 
   // Pilot Club: check the fields, then send them to Brevo (double opt-in, redirects to /mission/check-your-email/)
   var form = document.getElementById('club-form');
