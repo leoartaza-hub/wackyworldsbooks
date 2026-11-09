@@ -60,6 +60,23 @@ nav.main a:hover{background:rgba(255,255,255,.1);color:#fff}
 .hero-row{display:flex;flex-wrap:wrap;gap:40px;align-items:center;padding-top:40px;padding-bottom:40px}
 .hero-img{flex:999 1 560px;min-width:0}
 .hero-img img{width:100%;height:auto;aspect-ratio:1595/986;object-fit:cover;border-radius:24px;box-shadow:0 18px 40px rgba(14,74,71,.18)}
+/* ---------- Hero carousel: swipe on phones, arrows on desktop, images 2-6 load after the page ---------- */
+.hero-car{position:relative}
+.hero-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:24px;box-shadow:0 18px 40px rgba(14,74,71,.18);background:var(--line);overscroll-behavior-x:contain}
+.hero-track::-webkit-scrollbar{display:none}
+.hero-track:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.hero-slide{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always}
+.hero-car .hero-slide img{display:block;width:100%;height:auto;aspect-ratio:1595/986;object-fit:cover;border-radius:0;box-shadow:none;transition:opacity 240ms ease}
+.hero-car .hero-slide img[data-src]{opacity:0}
+.hero-nav{position:absolute;top:50%;width:44px;height:44px;margin-top:-40px;border:2px solid var(--ink);border-radius:22px;background:var(--paper);color:var(--ink);display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 3px 0 var(--ink);opacity:0;transition:opacity 160ms ease,transform 120ms var(--ease-out)}
+.hero-nav.prev{left:14px}.hero-nav.next{right:14px}
+.hero-nav:active{transform:translateY(2px)}
+@media (hover:hover) and (pointer:fine){.hero-nav{display:flex}.hero-car:hover .hero-nav,.hero-nav:focus-visible{opacity:1}}
+.hero-dots{display:flex;justify-content:center;gap:2px;margin-top:10px}
+.hero-dots button{width:26px;height:26px;padding:0;border:0;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.hero-dots button span{width:9px;height:9px;border-radius:50%;background:var(--ink);opacity:.22;transition:opacity 160ms ease,transform 160ms var(--ease-out)}
+.hero-dots button[aria-current="true"] span{opacity:1;background:var(--accent);transform:scale(1.35)}
+@media (prefers-reduced-motion:reduce){.hero-car .hero-slide img,.hero-dots button span{transition:none}}
 .hero-text{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:18px}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{font-weight:800;font-size:13px;padding:6px 12px;border-radius:999px;letter-spacing:.04em}
@@ -368,8 +385,18 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
 
 <section id="top" class="hero" aria-label="New release">
   <div class="wrap hero-row">
-    <div class="hero-img">
-      <img src="assets/hero-cover.jpg" alt="Book 01 of the Wacky Worlds series, SUM-IX and the Mystery of Pilot Zero, lying on hand-drawn activity sketches" width="1595" height="986">
+    <div class="hero-img hero-car" role="region" aria-roledescription="carousel" aria-label="Book 01 highlights">
+      <div class="hero-track" id="hero-track" tabindex="0">
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="1 of 6"><img src="assets/hero-cover.jpg" alt="Book 01 of the Wacky Worlds series, SUM-IX and the Mystery of Pilot Zero, lying on hand-drawn activity sketches" width="1595" height="986" fetchpriority="high"></div>
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 6"><img data-src="assets/hero/slide-2.jpg" alt="Drawn by hand, made for curious minds: 80+ puzzles in Book 01" width="1600" height="989"></div>
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 6"><img data-src="assets/hero/slide-3.jpg" alt="Blast off into brain games: 80+ puzzles, 10 missions, one big mystery" width="1600" height="989"></div>
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 6"><img data-src="assets/hero/slide-4.jpg" alt="Puzzles from another galaxy: screen-free fun" width="1600" height="989"></div>
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="5 of 6"><img data-src="assets/hero/slide-5.jpg" alt="Follow the wacky story: pages from Mission 5" width="1600" height="989"></div>
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="6 of 6"><img data-src="assets/hero/slide-6.jpg" alt="Big adventures for little thinkers" width="1600" height="989"></div>
+      </div>
+      <button type="button" class="hero-nav prev" aria-label="Previous picture"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="hero-nav next" aria-label="Next picture"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="hero-dots" id="hero-dots"></div>
     </div>
     <div class="hero-text">
       <div class="chips"><span class="chip new">NEW · BOOK 01</span><span class="chip age">AGES 6–8</span></div>
@@ -380,7 +407,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
         <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Get it on Amazon</a>
         <a class="btn btn-outline" href="#missions" id="peek-open" aria-haspopup="dialog">Peek inside</a>
       </div>
-      <p class="facts">110 pages · 10 missions · 70 challenges · No screens needed</p>
+      <p class="facts">110 pages · 10 missions · 80+ puzzles · No screens needed</p>
     </div>
   </div>
 </section>
@@ -624,7 +651,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
     </button>
   </div>
   <div class="peek-foot">
-    <span>110 pages · 10 missions · 70 challenges</span>
+    <span>110 pages · 10 missions · 80+ puzzles</span>
     <a class="btn btn-primary peek-cta" href="#books">Get the book</a>
   </div>
 </dialog>
@@ -978,6 +1005,47 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
+  // Hero carousel: only the first picture loads with the page; the other five load once the page has finished
+  // (or straight away if the visitor starts swiping). No autoplay.
+  (function () {
+    var track = document.getElementById('hero-track'), dots = document.getElementById('hero-dots');
+    if (!track || !dots) return;
+    var car = track.parentNode, n = track.children.length, cur = 0, loaded = false;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function loadAll() {
+      if (loaded) return; loaded = true;
+      track.querySelectorAll('img[data-src]').forEach(function (img) {
+        img.onload = function () { img.removeAttribute('data-src'); };
+        img.src = img.getAttribute('data-src');
+      });
+    }
+    var html = '';
+    for (var i = 0; i < n; i++) html += '<button type="button" aria-label="Show picture ' + (i + 1) + ' of ' + n + '"' + (i ? '' : ' aria-current="true"') + '><span></span></button>';
+    dots.innerHTML = html;
+    function go(i) {
+      i = (i + n) % n; loadAll();
+      track.scrollTo({ left: i * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    function mark() {
+      var i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+      if (i === cur) return; cur = i;
+      Array.prototype.forEach.call(dots.children, function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+    }
+    var t;
+    track.addEventListener('scroll', function () { loadAll(); clearTimeout(t); t = setTimeout(mark, 60); }, { passive: true });
+    track.addEventListener('pointerdown', loadAll, { passive: true });
+    track.addEventListener('touchstart', loadAll, { passive: true });
+    dots.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) go(Array.prototype.indexOf.call(dots.children, b)); });
+    car.querySelector('.hero-nav.prev').addEventListener('click', function () { go(cur - 1); });
+    car.querySelector('.hero-nav.next').addEventListener('click', function () { go(cur + 1); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+    });
+    window.addEventListener('resize', function () { track.scrollTo({ left: cur * track.clientWidth, behavior: 'auto' }); });
+    function idle() { (window.requestIdleCallback || function (f) { setTimeout(f, 1200); })(loadAll, { timeout: 4000 }); }
+    if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle);
+  })();
 </script>
 </body>
 </html>
