@@ -68,8 +68,9 @@ nav.main a:hover{background:rgba(255,255,255,.1);color:#fff}
 .hero-slide{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always}
 .hero-car .hero-slide img{display:block;width:100%;height:auto;aspect-ratio:1595/986;object-fit:cover;border-radius:0;box-shadow:none;transition:opacity 240ms ease}
 .hero-car .hero-slide img[data-src]{opacity:0}
-.hero-nav{position:absolute;top:50%;width:44px;height:44px;margin-top:-40px;border:2px solid var(--ink);border-radius:22px;background:var(--paper);color:var(--ink);display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 3px 0 var(--ink);opacity:0;transition:opacity 160ms ease,transform 120ms var(--ease-out)}
+.hero-nav{position:absolute;top:50%;width:44px;height:44px;margin-top:-40px;border:2px solid var(--ink);border-radius:22px;background:rgba(255,251,243,.7);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:var(--ink);display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 3px 0 var(--ink);opacity:0;transition:opacity 160ms ease,transform 120ms var(--ease-out),background-color 160ms ease}
 .hero-nav.prev{left:14px}.hero-nav.next{right:14px}
+.hero-nav:hover{background:var(--paper)}
 .hero-nav:active{transform:translateY(2px)}
 @media (hover:hover) and (pointer:fine){.hero-nav{display:flex}.hero-car:hover .hero-nav,.hero-nav:focus-visible{opacity:1}}
 .hero-dots{display:flex;justify-content:center;gap:2px;margin-top:10px}
@@ -387,12 +388,11 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
   <div class="wrap hero-row">
     <div class="hero-img hero-car" role="region" aria-roledescription="carousel" aria-label="Book 01 highlights">
       <div class="hero-track" id="hero-track" tabindex="0">
-        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="1 of 6"><img src="assets/hero-cover.jpg" alt="Book 01 of the Wacky Worlds series, SUM-IX and the Mystery of Pilot Zero, lying on hand-drawn activity sketches" width="1595" height="986" fetchpriority="high"></div>
-        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 6"><img data-src="assets/hero/slide-2.jpg" alt="Drawn by hand, made for curious minds: 80+ puzzles in Book 01" width="1600" height="989"></div>
-        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 6"><img data-src="assets/hero/slide-3.jpg" alt="Blast off into brain games: 80+ puzzles, 10 missions, one big mystery" width="1600" height="989"></div>
-        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 6"><img data-src="assets/hero/slide-4.jpg" alt="Puzzles from another galaxy: screen-free fun" width="1600" height="989"></div>
-        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="5 of 6"><img data-src="assets/hero/slide-5.jpg" alt="Follow the wacky story: pages from Mission 5" width="1600" height="989"></div>
-        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="6 of 6"><img data-src="assets/hero/slide-6.jpg" alt="Big adventures for little thinkers" width="1600" height="989"></div>
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="1 of 5"><img src="assets/hero/slide-2.jpg" alt="Drawn by hand, made for curious minds: 80+ puzzles in Book 01" width="1600" height="989" fetchpriority="high"></div>
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 5"><img data-src="assets/hero/slide-3.jpg" alt="Blast off into brain games: 80+ puzzles, 10 missions, one big mystery" width="1600" height="989"></div>
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 5"><img data-src="assets/hero/slide-4.jpg" alt="Puzzles from another galaxy: screen-free fun" width="1600" height="989"></div>
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 5"><img data-src="assets/hero/slide-5.jpg" alt="Follow the wacky story: pages from Mission 5" width="1600" height="989"></div>
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="5 of 5"><img data-src="assets/hero/slide-6.jpg" alt="Big adventures for little thinkers" width="1600" height="989"></div>
       </div>
       <button type="button" class="hero-nav prev" aria-label="Previous picture"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
       <button type="button" class="hero-nav next" aria-label="Next picture"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
