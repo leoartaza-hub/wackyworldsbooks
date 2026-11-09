@@ -250,6 +250,46 @@ html:has(.search[open]){overflow:hidden}
 @media (max-width:640px){.search{margin-top:4vh}.search-results .kind{display:none}}
 @media (prefers-reduced-motion:reduce){.search[open]{animation-name:fade-in}}
 
+/* ---------- Wishlist (hearts on books + header list) ---------- */
+.thumb .fav{position:absolute;top:10px;right:10px;width:44px;height:44px;border:0;border-radius:22px;background:var(--paper);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform 160ms var(--ease-out)}
+.thumb .fav:active{transform:scale(.9)}
+.fav svg path,.wish-btn svg path{transition:fill 160ms ease,stroke 160ms ease}
+.fav[aria-pressed="true"]{color:var(--red)}
+.fav[aria-pressed="true"] svg path{fill:var(--red)}
+.fav.beat svg{animation:heart-beat 420ms cubic-bezier(0.34,1.56,0.64,1)}
+@keyframes heart-beat{0%{transform:scale(1)}40%{transform:scale(1.32)}100%{transform:scale(1)}}
+.wish-btn{position:relative}
+.wish-btn.has svg path{fill:var(--red);stroke:var(--red)}
+.wish-count{position:absolute;top:4px;right:2px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--ink);font-size:11px;font-weight:800;line-height:18px;text-align:center}
+.wish-count.bump{animation:heart-beat 380ms cubic-bezier(0.34,1.56,0.64,1)}
+html:has(.wish[open]){overflow:hidden}
+.wish{width:min(520px,94vw);max-width:94vw;padding:0;border:0;border-radius:22px;background:var(--paper);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.4);overflow:hidden}
+.wish::backdrop{background:rgba(14,74,71,.72)}
+.wish[open]{animation:peek-in 220ms var(--ease-out)}
+.wish[open]::backdrop{animation:fade-in 220ms ease}
+.wish-head{display:flex;align-items:center;gap:10px;padding:12px 12px 8px 20px}
+.wish-head h2{flex:1;margin:0;font-family:'Lilita One',sans-serif;font-weight:400;font-size:24px;color:var(--teal)}
+.wish-list{list-style:none;margin:0;padding:4px 14px 6px;max-height:min(60vh,480px);overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.wish-list[hidden],.wish-empty[hidden]{display:none}
+.wish-list li{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:10px}
+.wish-list .pic{flex:none;width:56px;height:56px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.wish-list .pic img{width:100%;height:100%;object-fit:cover}
+.wish-list .pic img.sketch{width:44px;height:44px;border-radius:50%;background:#fff}
+.wish-list .info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.wish-list .t{font-weight:800;font-size:15px;line-height:1.3}
+.wish-list .s{font-size:13px;color:var(--muted)}
+.wish-list .act{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.wish-list .act a{font-size:13px;font-weight:800;padding:6px 12px;border-radius:999px;text-decoration:none;min-height:32px;display:inline-flex;align-items:center}
+.wish-list .act .buy{background:var(--accent);color:var(--ink)}
+.wish-list .act .notify{border:2px solid var(--teal);color:var(--teal)}
+.wish-list .remove{flex:none;width:40px;height:40px;border:0;border-radius:20px;background:transparent;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.wish-list .remove:hover{background:var(--cream);color:var(--ink)}
+.wish-empty{padding:8px 20px 6px}
+.wish-empty p{margin:0 0 14px;font-size:15px;color:var(--ink-2)}
+.wish-empty .btn{font-size:15px;padding:11px 20px}
+.wish-note{margin:8px 20px 16px;font-size:12px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.fav.beat svg,.wish-count.bump{animation:none}.wish[open]{animation-name:fade-in}}
+
 /* ---------- Peek inside (book page viewer) ---------- */
 html:has(.peek[open]){overflow:hidden}
 .peek{width:min(600px,94vw);max-width:94vw;max-height:94vh;padding:0;border:0;border-radius:24px;background:var(--paper);color:var(--ink);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)}
@@ -312,9 +352,10 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       <button type="button" class="icon-btn" id="search-open" aria-label="Search the site" aria-haspopup="dialog">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
       </button>
-      <a class="icon-btn" href="#club" aria-label="Join the Pilot Club">
+      <button type="button" class="icon-btn wish-btn" id="wish-open" aria-label="My wishlist" aria-haspopup="dialog">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
-      </a>
+        <span class="wish-count" id="wish-count" hidden>0</span>
+      </button>
       <a class="btn shop-btn" href="#books">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg>
         Shop books
@@ -384,7 +425,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
   </div>
   <div class="book-grid rv" id="book-grid">
     <article class="book" data-status="out">
-      <div class="thumb bg-red"><img class="cover" src="assets/hero-cover.jpg" alt="Book 01 cover" loading="lazy"><span class="badge dark">New</span></div>
+      <div class="thumb bg-red"><img class="cover" src="assets/hero-cover.jpg" alt="Book 01 cover" loading="lazy"><span class="badge dark">New</span><button type="button" class="fav" data-fav="b1" aria-pressed="false" aria-label="Add SUM-IX and the Mystery of Pilot Zero to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
       <div class="book-body">
         <span class="meta">BOOK 01 · AGES 6–8 · 110 PAGES</span>
         <h3>SUM-IX and the Mystery of Pilot Zero</h3>
@@ -394,7 +435,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       </div>
     </article>
     <article class="book" data-status="soon">
-      <div class="thumb bg-green"><img class="sketch" src="assets/lexi.jpg" alt="Lexi sketch" loading="lazy"><span class="badge">Coming soon</span></div>
+      <div class="thumb bg-green"><img class="sketch" src="assets/lexi.jpg" alt="Lexi sketch" loading="lazy"><span class="badge">Coming soon</span><button type="button" class="fav" data-fav="b2" aria-pressed="false" aria-label="Add Lexi and the Treasure of the Crooked Quill to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
       <div class="book-body">
         <span class="meta">BOOK 02 · LETTERS &amp; WORDS</span>
         <h3>Lexi and the Treasure of the Crooked Quill</h3>
@@ -403,7 +444,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       </div>
     </article>
     <article class="book" data-status="soon">
-      <div class="thumb bg-cyan"><img class="sketch" src="assets/ollix.jpg" alt="Ollix sketch" loading="lazy"><span class="badge">In the works</span></div>
+      <div class="thumb bg-cyan"><img class="sketch" src="assets/ollix.jpg" alt="Ollix sketch" loading="lazy"><span class="badge">In the works</span><button type="button" class="fav" data-fav="b3" aria-pressed="false" aria-label="Add Ollix: the book of observation to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
       <div class="book-body">
         <span class="meta">BOOK 03 · OBSERVATION</span>
         <h3>Ollix: the book of observation</h3>
@@ -412,7 +453,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       </div>
     </article>
     <article class="book" data-status="soon">
-      <div class="thumb bg-gold"><img class="sketch" src="assets/astro.jpg" alt="Astro sketch" loading="lazy"><span class="badge">In the works</span></div>
+      <div class="thumb bg-gold"><img class="sketch" src="assets/astro.jpg" alt="Astro sketch" loading="lazy"><span class="badge">In the works</span><button type="button" class="fav" data-fav="b4" aria-pressed="false" aria-label="Add Astro: mazes and exploring to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
       <div class="book-body">
         <span class="meta">BOOK 04 · MAZES &amp; MAPS</span>
         <h3>Astro: mazes &amp; exploring</h3>
@@ -421,7 +462,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       </div>
     </article>
     <article class="book" data-status="soon">
-      <div class="thumb bg-purple"><img class="sketch" src="assets/arti.jpg" alt="Arti sketch" loading="lazy"><span class="badge">In the works</span></div>
+      <div class="thumb bg-purple"><img class="sketch" src="assets/arti.jpg" alt="Arti sketch" loading="lazy"><span class="badge">In the works</span><button type="button" class="fav" data-fav="b5" aria-pressed="false" aria-label="Add Arti and Pompita: colour and creativity to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
       <div class="book-body">
         <span class="meta">BOOK 05 · CREATIVITY</span>
         <h3>Arti &amp; Pompita: colour &amp; creativity</h3>
@@ -523,6 +564,22 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
 </section>
 
 </main>
+
+<!-- Wishlist: saved only in this browser (localStorage), nothing is sent anywhere -->
+<dialog class="wish" id="wish" aria-labelledby="wish-title">
+  <div class="wish-head">
+    <h2 id="wish-title">My wishlist</h2>
+    <button type="button" class="search-close" id="wish-close" aria-label="Close wishlist">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <ul class="wish-list" id="wish-list"></ul>
+  <div class="wish-empty" id="wish-empty">
+    <p><strong>No favourites yet.</strong> Tap the heart on any book to save it here.</p>
+    <a class="btn btn-primary" href="#books" id="wish-browse">Browse the books</a>
+  </div>
+  <p class="wish-note">Saved on this device only. No account needed.</p>
+</dialog>
 
 <!-- Site search: everything runs in the browser, nothing is sent anywhere -->
 <dialog class="search" id="search" aria-labelledby="search-title">
@@ -831,6 +888,69 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       else if (e.key === 'Enter') { choose(sel, e); }
     });
     list.addEventListener('click', function (e) { var a = e.target.closest('a[data-n]'); if (a) choose(+a.getAttribute('data-n'), e); });
+  })();
+
+  // Wishlist: hearts on the book cards, a count on the header heart and a "My wishlist" window.
+  // Saved in this browser only (localStorage); nothing is sent anywhere.
+  (function () {
+    var BOOKS = {
+      b1: { t: 'SUM-IX and the Mystery of Pilot Zero', s: 'Book 01 · $9.99 paperback', img: 'assets/hero-cover.jpg', cover: true, out: true, bg: 'var(--red)' },
+      b2: { t: 'Lexi and the Treasure of the Crooked Quill', s: 'Book 02 · coming soon', img: 'assets/lexi.jpg', bg: 'var(--green)' },
+      b3: { t: 'Ollix: the book of observation', s: 'Book 03 · in the works', img: 'assets/ollix.jpg', bg: 'var(--cyan)' },
+      b4: { t: 'Astro: mazes & exploring', s: 'Book 04 · in the works', img: 'assets/astro.jpg', bg: 'var(--gold)' },
+      b5: { t: 'Arti & Pompita: colour & creativity', s: 'Book 05 · in the works', img: 'assets/arti.jpg', bg: 'var(--purple)' }
+    };
+    var KEY = 'ww-wishlist', saved = [];
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '[]').filter(function (id) { return BOOKS[id]; }); } catch (e) { saved = []; }
+    function store() { try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {} }
+    var count = document.getElementById('wish-count'), openBtn = document.getElementById('wish-open');
+    var dlg = document.getElementById('wish'), list = document.getElementById('wish-list'), empty = document.getElementById('wish-empty');
+    if (!count || !openBtn || !dlg) return;
+    var buyLink = document.querySelector('#book-grid .buy');
+    var buyHref = buyLink ? buyLink.getAttribute('href') : '#books';
+    function paint(bump) {
+      document.querySelectorAll('.fav[data-fav]').forEach(function (b) {
+        var id = b.getAttribute('data-fav'), on = saved.indexOf(id) !== -1, title = BOOKS[id].t;
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.setAttribute('aria-label', (on ? 'Remove ' : 'Add ') + title + (on ? ' from' : ' to') + ' my wishlist');
+      });
+      count.textContent = saved.length; count.hidden = !saved.length;
+      openBtn.classList.toggle('has', saved.length > 0);
+      openBtn.setAttribute('aria-label', 'My wishlist' + (saved.length ? ' (' + saved.length + ')' : ''));
+      if (bump) { count.classList.remove('bump'); void count.offsetWidth; count.classList.add('bump'); }
+    }
+    function renderList() {
+      empty.hidden = saved.length > 0; list.hidden = !saved.length;
+      list.innerHTML = saved.map(function (id) {
+        var b = BOOKS[id];
+        var act = b.out
+          ? '<a class="buy" href="' + buyHref + '" target="_blank" rel="noopener">Buy on Amazon</a>'
+          : '<a class="notify" href="#club" data-close>Notify me when it&#39;s out</a>';
+        return '<li><span class="pic" style="background:' + b.bg + '"><img class="' + (b.cover ? '' : 'sketch') + '" src="' + b.img + '" alt=""></span>' +
+          '<span class="info"><span class="t">' + b.t + '</span><span class="s">' + b.s + '</span><span class="act">' + act + '</span></span>' +
+          '<button type="button" class="remove" data-remove="' + id + '" aria-label="Remove ' + b.t + ' from my wishlist"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></li>';
+      }).join('');
+    }
+    document.querySelectorAll('.fav[data-fav]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var id = b.getAttribute('data-fav'), i = saved.indexOf(id);
+        if (i === -1) { saved.push(id); b.classList.remove('beat'); void b.offsetWidth; b.classList.add('beat'); } else { saved.splice(i, 1); }
+        store(); paint(true);
+      });
+    });
+    if (typeof dlg.showModal === 'function') {
+      openBtn.addEventListener('click', function () { renderList(); dlg.showModal(); });
+      document.getElementById('wish-close').addEventListener('click', function () { dlg.close(); });
+      dlg.addEventListener('click', function (e) {
+        if (e.target === dlg) { dlg.close(); return; }
+        var r = e.target.closest('[data-remove]');
+        if (r) { saved.splice(saved.indexOf(r.getAttribute('data-remove')), 1); store(); paint(true); renderList(); return; }
+        if (e.target.closest('[data-close], #wish-browse')) dlg.close();
+      });
+      dlg.addEventListener('close', function () { openBtn.focus({ preventScroll: true }); });
+    }
+    window.addEventListener('storage', function (e) { if (e.key === KEY) { try { saved = JSON.parse(e.newValue || '[]'); } catch (x) { saved = []; } paint(false); } });
+    paint(false);
   })();
 
   // Footer "Coming soon" (and similar): jump to the books and apply that filter
