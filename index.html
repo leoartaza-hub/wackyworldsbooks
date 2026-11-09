@@ -467,7 +467,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
         <span class="meta">BOOK 02 · LETTERS &amp; WORDS</span>
         <h3>Lexi and the Treasure of the Crooked Quill</h3>
         <span class="price">Coming soon</span>
-        <a class="btn notify" href="#club">Notify me</a>
+        <a class="btn notify" href="#club" data-book="Lexi">Notify me</a>
       </div>
     </article>
     <article class="book" data-status="soon">
@@ -476,7 +476,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
         <span class="meta">BOOK 03 · OBSERVATION</span>
         <h3>Ollix: the book of observation</h3>
         <span class="price">In the works</span>
-        <a class="btn notify" href="#club">Notify me</a>
+        <a class="btn notify" href="#club" data-book="Ollix">Notify me</a>
       </div>
     </article>
     <article class="book" data-status="soon">
@@ -485,7 +485,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
         <span class="meta">BOOK 04 · MAZES &amp; MAPS</span>
         <h3>Astro: mazes &amp; exploring</h3>
         <span class="price">In the works</span>
-        <a class="btn notify" href="#club">Notify me</a>
+        <a class="btn notify" href="#club" data-book="Astro">Notify me</a>
       </div>
     </article>
     <article class="book" data-status="soon">
@@ -494,7 +494,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
         <span class="meta">BOOK 05 · CREATIVITY</span>
         <h3>Arti &amp; Pompita: colour &amp; creativity</h3>
         <span class="price">In the works</span>
-        <a class="btn notify" href="#club">Notify me</a>
+        <a class="btn notify" href="#club" data-book="Arti &amp; Pompita">Notify me</a>
       </div>
     </article>
   </div>
@@ -565,7 +565,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
   <div class="club">
     <div style="flex:1 1 360px;min-width:0">
       <h2 id="club-h" class="section-title">Join the Pilot Club</h2>
-      <p>Start with a free printable SUM-IX mission, then get new free activities and first news about new books. For grown-ups only. No spam, ever.</p>
+      <p id="club-p">Start with a free printable SUM-IX mission, then get new free activities and first news about new books. For grown-ups only. No spam, ever.</p>
     </div>
     <!-- Same Brevo double opt-in form as /mission ("Free Mission Web", list: Web - Free Mission) -->
     <form id="club-form" method="POST" action="https://754aff81.sibforms.com/serve/MUIFAGFvqMMK9nIOeRPwzwze9qKkLa7SBcbkif1VjogNPTWzdL7yEZIEKeiyCwWylGg2JnKe_3YJqtuyVpybQTRXFf0U1htt80EnrtBzbz7F4U6u2uSO_dQqssim5hju-DrIomHRdmCglhavzWKVIC0fYeb7hLRXkI3uYt1ks8lPS_twrItmGUj0cs5E0Bj0d5zJ_QfvuZ5ZWhE-Qg==" novalidate>
@@ -922,10 +922,10 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
   (function () {
     var BOOKS = {
       b1: { t: 'SUM-IX and the Mystery of Pilot Zero', s: 'Book 01 · $9.99 paperback', img: 'assets/hero-cover.jpg', cover: true, out: true, bg: 'var(--red)' },
-      b2: { t: 'Lexi and the Treasure of the Crooked Quill', s: 'Book 02 · coming soon', img: 'assets/lexi.jpg', bg: 'var(--green)' },
-      b3: { t: 'Ollix: the book of observation', s: 'Book 03 · in the works', img: 'assets/ollix.jpg', bg: 'var(--cyan)' },
-      b4: { t: 'Astro: mazes & exploring', s: 'Book 04 · in the works', img: 'assets/astro.jpg', bg: 'var(--gold)' },
-      b5: { t: 'Arti & Pompita: colour & creativity', s: 'Book 05 · in the works', img: 'assets/arti.jpg', bg: 'var(--purple)' }
+      b2: { n: 'Lexi', t: 'Lexi and the Treasure of the Crooked Quill', s: 'Book 02 · coming soon', img: 'assets/lexi.jpg', bg: 'var(--green)' },
+      b3: { n: 'Ollix', t: 'Ollix: the book of observation', s: 'Book 03 · in the works', img: 'assets/ollix.jpg', bg: 'var(--cyan)' },
+      b4: { n: 'Astro', t: 'Astro: mazes & exploring', s: 'Book 04 · in the works', img: 'assets/astro.jpg', bg: 'var(--gold)' },
+      b5: { n: 'Arti &amp; Pompita', t: 'Arti & Pompita: colour & creativity', s: 'Book 05 · in the works', img: 'assets/arti.jpg', bg: 'var(--purple)' }
     };
     var KEY = 'ww-wishlist', saved = [];
     try { saved = JSON.parse(localStorage.getItem(KEY) || '[]').filter(function (id) { return BOOKS[id]; }); } catch (e) { saved = []; }
@@ -952,7 +952,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
         var b = BOOKS[id];
         var act = b.out
           ? '<a class="buy" href="' + buyHref + '" target="_blank" rel="noopener">Buy on Amazon</a>'
-          : '<a class="notify" href="#club" data-close>Notify me when it&#39;s out</a>';
+          : '<a class="notify" href="#club" data-close data-book="' + b.n + '">Notify me when it&#39;s out</a>';
         return '<li><span class="pic" style="background:' + b.bg + '"><img class="' + (b.cover ? '' : 'sketch') + '" src="' + b.img + '" alt=""></span>' +
           '<span class="info"><span class="t">' + b.t + '</span><span class="s">' + b.s + '</span><span class="act">' + act + '</span></span>' +
           '<button type="button" class="remove" data-remove="' + id + '" aria-label="Remove ' + b.t + ' from my wishlist"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></li>';
@@ -1001,7 +1001,23 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
     clubBtn.disabled = true;
     clubBtn.textContent = 'Sending…';
   });
-  window.addEventListener('pageshow', function () { clubBtn.disabled = false; clubBtn.textContent = 'Send me the mission'; });
+  window.addEventListener('pageshow', function () { clubBtn.disabled = false; clubBtn.textContent = clubBtn.getAttribute('data-label') || 'Send me the mission'; });
+
+  // "Notify me" buttons (book cards and wishlist): same Pilot Club form and Brevo list,
+  // but the heading, text and button name the book the visitor clicked on.
+  var clubH = document.getElementById('club-h'), clubP = document.getElementById('club-p');
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[data-book]');
+    if (!a) return;
+    var book = a.getAttribute('data-book');
+    clubH.textContent = 'Get notified when ' + book + '’s book is out';
+    clubP.textContent = 'We’ll email you the day it’s out, plus a free printable SUM-IX mission to enjoy while you wait. For grown-ups only. No spam, ever.';
+    clubBtn.setAttribute('data-label', 'Notify me');
+    if (!clubBtn.disabled) clubBtn.textContent = 'Notify me';
+    note.textContent = '';
+    // Focus the email box once the wishlist window (if any) has closed and handed focus back.
+    setTimeout(function () { document.getElementById('club-email').focus({ preventScroll: true }); }, 60);
+  });
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
