@@ -197,6 +197,27 @@ footer.site{background:var(--ink);color:var(--cream)}
 .legal a{color:#D9D1BF}
 .legal span{display:flex;gap:18px;flex-wrap:wrap}
 
+/* ---------- Motion (transform + opacity only, no libraries) ---------- */
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1)}
+/* 1. Press feedback: the 3D buttons sink like a toy brick, the rest give a small squeeze */
+.btn-primary{transition:transform 120ms var(--ease-out),box-shadow 120ms var(--ease-out)}
+.btn-primary:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.shop-btn,.book .btn,.btn-outline,.feature .btn,.pill,.tab,.club button,.icon-btn,.social a{transition:transform 160ms var(--ease-out)}
+.shop-btn:active,.book .btn:active,.btn-outline:active,.feature .btn:active,.pill:active,.tab:active,.club button:active,.icon-btn:active,.social a:active{transform:scale(.97)}
+.more:active{transform:translateY(-1px) scale(.99)}
+/* 2. Tab and filter swaps: the cards that appear rise in, one after another */
+.pop{animation:pop-in 260ms var(--ease-out) both;animation-delay:calc(var(--i,0) * 40ms)}
+@keyframes pop-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* 3. Scroll-in cascade, once per group (only when JS is running: html.motion) */
+html.motion .rv > *{opacity:0;transform:translateY(16px)}
+html.motion .rv.in > *{opacity:1;transform:none;transition:opacity 450ms var(--ease-out),transform 450ms var(--ease-out);transition-delay:calc(var(--i,0) * 50ms)}
+@media (prefers-reduced-motion:reduce){
+  .btn-primary:active{transform:none}
+  .pop{animation-name:fade-in}
+  html.motion .rv > *{transform:none}
+}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+
 @media (max-width:640px){
   .header-row{gap:12px}
   .header-row .logo{margin-bottom:-8px}
@@ -206,6 +227,11 @@ footer.site{background:var(--ink);color:var(--cream)}
   .club{padding:28px 22px}
 }
 </style>
+<script>
+// Hide scroll-in groups only when JS runs; safety net: show everything if the main script never starts
+document.documentElement.classList.add('motion');
+setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.remove('motion'); }, 2500);
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -267,7 +293,7 @@ footer.site{background:var(--ink);color:var(--cream)}
     <button class="tab" role="tab" id="tab-skills" aria-controls="panel-skills" aria-selected="false" tabindex="-1">Skills</button>
   </div>
   <div id="panel-chars" role="tabpanel" aria-labelledby="tab-chars">
-    <div class="char-grid">
+    <div class="char-grid rv">
       <a class="char" href="#books"><span class="ring bg-green"><img src="assets/lexi.jpg" alt="Lexi the superhero reading frog" loading="lazy"></span><span class="name">Lexi</span><span class="skill">Letters &amp; words</span></a>
       <a class="char" href="#books"><span class="ring bg-cyan"><img src="assets/ollix.jpg" alt="Ollix the many-eyed space octopus" loading="lazy"></span><span class="name">Ollix</span><span class="skill">Observation</span></a>
       <a class="char" href="#books"><span class="ring bg-gold"><img src="assets/astro.jpg" alt="Astro the pirate cosmonaut dog" loading="lazy"></span><span class="name">Astro</span><span class="skill">Mazes &amp; maps</span></a>
@@ -299,7 +325,7 @@ footer.site{background:var(--ink);color:var(--cream)}
       <button class="pill" role="tab" data-filter="soon" aria-selected="false" tabindex="-1">Coming soon</button>
     </div>
   </div>
-  <div class="book-grid" id="book-grid">
+  <div class="book-grid rv" id="book-grid">
     <article class="book" data-status="out">
       <div class="thumb bg-red"><img class="cover" src="assets/hero-cover.jpg" alt="Book 01 cover" loading="lazy"><span class="badge dark">New</span></div>
       <div class="book-body">
@@ -356,7 +382,7 @@ footer.site{background:var(--ink);color:var(--cream)}
       <p>Every page is part of a mission. Your child wakes the ship, survives an asteroid storm, decodes an alien message and earns the title of Master Pilot, with seven challenges in every mission.</p>
       <img src="assets/spaceship.jpg" alt="SUM-IX piloting a wacky little spaceship with an umbrella, a horn and a propeller" loading="lazy" width="1000" height="859">
     </div>
-    <ol class="mission-list">
+    <ol class="mission-list rv">
       <li><span class="n bg-green">1</span><span><span class="k">MISSION 1</span><span class="v">Wake the Ship</span></span></li>
       <li><span class="n bg-cyan">2</span><span><span class="k">MISSION 2</span><span class="v">Asteroid Storm</span></span></li>
       <li><span class="n bg-gold">3</span><span><span class="k">MISSION 3</span><span class="v">Power Meltdown</span></span></li>
@@ -374,7 +400,7 @@ footer.site{background:var(--ink);color:var(--cream)}
 <section id="featured" class="wrap" aria-labelledby="featured-h">
   <h2 id="featured-h" class="section-title">Featured this week</h2>
   <p class="sub">A closer look at the academy, and why parents love it.</p>
-  <div class="feature-grid">
+  <div class="feature-grid rv">
     <article id="parents" class="feature parents">
       <img src="assets/hero-cover.jpg" alt="Hand-drawn puzzle sketches from the book" loading="lazy" style="object-position:10% 50%">
       <div class="in">
@@ -398,7 +424,7 @@ footer.site{background:var(--ink);color:var(--cream)}
 
 <section id="free" class="wrap" aria-labelledby="more-h">
   <h2 id="more-h" class="section-title">Discover more</h2>
-  <div class="more-grid">
+  <div class="more-grid rv">
     <a class="more" href="/mission/"><span class="ic bg-green"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></span><span class="t">Free printable mission</span><span class="b">3 real activity pages from the book to try at home: math, logic and observation.</span><span class="c">Get it free →</span></a>
     <a class="more" href="#books"><span class="ic bg-gold"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></span><span class="t">Pilot Certificate</span><span class="b">Finish every mission and scan the secret QR on the last page of the book to unlock it.</span><span class="c">See the book →</span></a>
     <a class="more" href="#characters"><span class="ic bg-cyan"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span><span class="t">Meet the five</span><span class="b">Five worlds, five skills, five unlikely friends. Who are you most like?</span><span class="c">Meet them →</span></a>
@@ -503,10 +529,24 @@ footer.site{background:var(--ink);color:var(--cream)}
     });
   }
 
+  // Cards that just appeared rise in, one after another (restarts cleanly on fast clicks)
+  function popIn(nodes) {
+    var shown = Array.prototype.filter.call(nodes, function (n) { return !n.hidden; });
+    shown.forEach(function (n, i) {
+      n.classList.remove('pop');
+      void n.offsetWidth;
+      n.style.setProperty('--i', Math.min(i, 6));
+      n.classList.add('pop');
+    });
+  }
+  document.addEventListener('animationend', function (e) { if (e.target.classList) e.target.classList.remove('pop'); });
+
   var exploreList = document.querySelector('#characters [role="tablist"]');
   setupTabs(exploreList, function (tab) {
     exploreList.querySelectorAll('[role="tab"]').forEach(function (t) {
-      document.getElementById(t.getAttribute('aria-controls')).hidden = t !== tab;
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      panel.hidden = t !== tab;
+      if (t === tab) popIn(panel.querySelectorAll('.char, .skill-card'));
     });
   });
 
@@ -517,7 +557,31 @@ footer.site{background:var(--ink);color:var(--cream)}
     books.forEach(function (b) {
       b.hidden = !(f === 'all' || b.getAttribute('data-status') === f);
     });
+    popIn(books);
   });
+
+  // Scroll-in cascade: each group animates the first time it comes into view, then goes back to normal
+  var groups = document.querySelectorAll('.rv');
+  function settle(g) {
+    var n = g.children.length;
+    setTimeout(function () { g.classList.remove('rv', 'in'); }, 450 + Math.min(n, 8) * 50 + 100);
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var g = en.target;
+        Array.prototype.forEach.call(g.children, function (c, i) { c.style.setProperty('--i', Math.min(i, 8)); });
+        g.classList.add('in');
+        io.unobserve(g);
+        settle(g);
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    groups.forEach(function (g) { io.observe(g); });
+  } else {
+    document.documentElement.classList.remove('motion');
+  }
+  window.__motionReady = true;
 
   // Pilot Club: check the fields, then send them to Brevo (double opt-in, redirects to /mission/check-your-email/)
   var form = document.getElementById('club-form');

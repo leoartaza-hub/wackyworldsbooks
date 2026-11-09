@@ -82,6 +82,53 @@ main{flex:1}
 .skills{display:flex;flex-wrap:wrap;gap:8px}
 .skills span{font-size:13px;font-weight:800;padding:6px 12px;border-radius:999px;color:var(--ink)}
 
+/* "Still cooking" page (/parents) */
+.cooking{position:relative;max-width:420px;margin:0 auto}
+.cooking .robot{width:100%;height:auto;border-radius:24px;background:#fff;box-shadow:0 18px 40px rgba(14,74,71,.18)}
+.cooking .steam{position:absolute;top:-6px;left:50%;transform:translateX(-50%);display:flex;gap:14px}
+.cooking .steam span{width:12px;height:40px;border-radius:12px;background:var(--line);opacity:.0;animation:steam 2.4s ease-in-out infinite}
+.cooking .steam span:nth-child(2){animation-delay:.5s}.cooking .steam span:nth-child(3){animation-delay:1s}
+@keyframes steam{0%{opacity:0;transform:translateY(16px) scaleY(.6)}40%{opacity:.9}100%{opacity:0;transform:translateY(-30px) scaleY(1.1)}}
+.progress{background:var(--cream);border:2px solid var(--ink);border-radius:999px;height:26px;overflow:hidden;position:relative}
+.progress .bar{height:100%;width:73%;border-radius:999px;background:repeating-linear-gradient(-45deg,var(--accent) 0 14px,var(--gold) 14px 28px);background-size:40px 40px;animation:stripes 1.2s linear infinite}
+@keyframes stripes{to{background-position:40px 0}}
+.progress-label{display:flex;justify-content:space-between;font-size:14px;font-weight:800;color:var(--teal);margin-top:6px}
+.cooking-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:15px;color:var(--ink-2)}
+.cooking-list li::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:10px;vertical-align:middle}
+.cooking-list li.done::before{background:var(--green)}
+.cooking-list li.todo::before{background:var(--gold)}
+@media (prefers-reduced-motion:reduce){.cooking .steam span,.progress .bar{animation:none}.cooking .steam span{opacity:.6}}
+
+/* ---------- Motion (transform + opacity only) ---------- */
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-pop:cubic-bezier(0.34,1.56,0.64,1)}
+/* Press feedback: 3D buttons sink like a toy brick */
+.optin button,.btn-download{transition:transform 120ms var(--ease-out),box-shadow 120ms var(--ease-out)}
+.optin button:active:not(:disabled),.btn-download:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn-outline{transition:transform 160ms var(--ease-out),background-color 160ms ease,color 160ms ease}
+.btn-outline:active{transform:scale(.97)}
+
+/* Celebration on the "confirmed" pages (seen once per person) */
+.celebrate .wrap{position:relative}
+.celebrate h1{animation:title-pop 650ms var(--ease-pop) both}
+.celebrate p{animation:rise-in 450ms var(--ease-out) 180ms both}
+.celebrate ~ .wrap .steps li{animation:rise-in 450ms var(--ease-out) both}
+.celebrate ~ .wrap .steps li:nth-child(1){animation-delay:320ms}
+.celebrate ~ .wrap .steps li:nth-child(2){animation-delay:400ms}
+.celebrate ~ .wrap .steps li:nth-child(3){animation-delay:480ms}
+.sparkles{position:absolute;left:50%;top:38px;width:0;height:0;pointer-events:none}
+.sparkles i{position:absolute;left:-9px;top:-9px;width:18px;height:18px;background:var(--gold);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);opacity:0;animation:spark 900ms var(--ease-out) 150ms both}
+.sparkles i:nth-child(3n+2){background:var(--accent);width:14px;height:14px}
+.sparkles i:nth-child(3n){background:var(--cyan);width:12px;height:12px}
+@keyframes title-pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+@keyframes rise-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes spark{0%{opacity:1;transform:translate(0,0) scale(.4) rotate(0)}70%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1) rotate(160deg)}}
+@media (prefers-reduced-motion:reduce){
+  .optin button:active:not(:disabled),.btn-download:active,.btn-outline:active{transform:none}
+  .celebrate h1,.celebrate p,.celebrate ~ .wrap .steps li{animation-name:fade-in}
+  .sparkles{display:none}
+}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+
 /* Long-form text pages (privacy policy) */
 .prose{max-width:760px;margin:0 auto;padding:40px 24px 64px;font-size:16px;line-height:1.65;color:var(--ink-2)}
 .prose h2{margin:36px 0 8px;font-family:'Lilita One',sans-serif;font-weight:400;font-size:26px;line-height:1.15;color:var(--teal)}
