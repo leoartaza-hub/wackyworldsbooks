@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="only light">
+<title>Free SUM-IX mission · Wacky Worlds Books</title>
+<meta name="description" content="Try Wacky Worlds for free: 3 real activity pages from SUM-IX and the Mystery of Pilot Zero. Math, logic and observation puzzles for kids 6–8, sent to your inbox.">
+<meta property="og:title" content="Free printable SUM-IX mission · Wacky Worlds Books">
+<meta property="og:description" content="3 real activity pages from the book: math, logic and observation puzzles for kids 6–8.">
+<meta property="og:image" content="https://wackyworldsbooks.com/assets/mission-page-1.jpg">
+<meta property="og:url" content="https://wackyworldsbooks.com/mission/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/gift/gift.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Wacky Worlds Books home"><img src="/assets/logo-badge.png" alt="Wacky Worlds" width="140" height="84"></a>
+    <a class="home" href="/">Visit the website</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap gift-row">
+    <div class="gift-img">
+      <div class="page-fan">
+        <img src="/assets/mission-page-2.jpg" alt="Activity page: crack the value of each alien" width="900" height="1165">
+        <img src="/assets/mission-page-1.jpg" alt="Activity page: SUM-IX lifts 100 kg of weights" width="900" height="1165">
+        <img src="/assets/mission-page-3.jpg" alt="Activity page: the giant telescope and the galaxy grid" width="900" height="1165">
+      </div>
+    </div>
+    <div class="gift-text">
+      <span class="chip">FREE PRINTABLE · AGES 6–8</span>
+      <h1>Try a free SUM-IX mission</h1>
+      <p class="lead">Print <strong>3 real activity pages</strong> from <em>SUM-IX and the Mystery of Pilot Zero</em> and see how your child learns while playing. No screens needed.</p>
+      <div class="skills">
+        <span class="bg-gold">Math</span>
+        <span class="bg-cyan">Logic &amp; codes</span>
+        <span class="bg-green">Observation</span>
+      </div>
+      <ul class="perks">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Free printable PDF, sent straight to your inbox</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>For grown-ups: we only ask for a parent's email</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>No spam. Unsubscribe with one click, anytime</li>
+      </ul>
+
+      <!-- Brevo double opt-in form "Free Mission Web" (list: Web - Free Mission).
+           After submit Brevo redirects to /mission/check-your-email/, after confirming to /mission/confirmed/. -->
+      <form class="optin" id="gift-form" method="POST" action="https://754aff81.sibforms.com/serve/MUIFAGFvqMMK9nIOeRPwzwze9qKkLa7SBcbkif1VjogNPTWzdL7yEZIEKeiyCwWylGg2JnKe_3YJqtuyVpybQTRXFf0U1htt80EnrtBzbz7F4U6u2uSO_dQqssim5hju-DrIomHRdmCglhavzWKVIC0fYeb7hLRXkI3uYt1ks8lPS_twrItmGUj0cs5E0Bj0d5zJ_QfvuZ5ZWhE-Qg==" novalidate>
+        <label class="field" for="gift-email">Parent's email</label>
+        <input id="gift-email" name="EMAIL" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <label class="consent">
+          <input type="checkbox" id="gift-consent" name="OPT_IN" value="1" required>
+          <span>I'm a parent or guardian over 18 and I agree to receive emails from Wacky Worlds Books. I can unsubscribe anytime. Read our <a href="/privacy/">privacy policy</a>.</span>
+        </label>
+        <input type="text" name="email_address_check" value="" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="locale" value="en">
+        <input type="hidden" name="html_type" value="simple">
+        <button type="submit" id="gift-submit">Send me the free mission</button>
+        <span class="note" id="gift-note" role="alert"></span>
+        <p class="small">We'll first send you a quick email to confirm it's really you.</p>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Wacky Worlds Books · wackyworldsbooks.com</span>
+    <a href="/privacy/">Privacy</a>
+  </div>
+</footer>
+
+<script>
+// Checks the fields, then sends them to Brevo (which redirects to /mission/check-your-email/)
+(function () {
+  var form = document.getElementById('gift-form');
+  var note = document.getElementById('gift-note');
+  var button = document.getElementById('gift-submit');
+  form.addEventListener('submit', function (e) {
+    var email = document.getElementById('gift-email');
+    var consent = document.getElementById('gift-consent');
+    if (!email.value || !email.checkValidity()) { e.preventDefault(); note.textContent = 'Please enter a valid email address.'; email.focus(); return; }
+    if (!consent.checked) { e.preventDefault(); note.textContent = 'Please tick the box so we can email you.'; consent.focus(); return; }
+    if (!form.getAttribute('action')) { e.preventDefault(); window.location.href = '/mission/check-your-email/'; return; } // not connected to Brevo yet (local preview only)
+    note.textContent = '';
+    button.disabled = true;
+    button.textContent = 'Sending…';
+  });
+  window.addEventListener('pageshow', function () { button.disabled = false; button.textContent = 'Send me the free mission'; });
+})();
+</script>
+</body>
+</html>

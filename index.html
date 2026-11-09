@@ -166,6 +166,11 @@ nav.main a:hover{background:rgba(255,255,255,.1);color:#fff}
 .club input{flex:1 1 220px;min-width:0;height:52px;border:2px solid var(--ink);border-radius:12px;padding:0 16px;font-size:16px;font-family:inherit;background:var(--paper);color:var(--ink)}
 .club button{height:52px;padding:0 24px;border:0;border-radius:12px;background:var(--ink);color:var(--cream);font-weight:800;font-size:16px;font-family:inherit;cursor:pointer}
 .club .note{font-size:14px;font-weight:700;min-height:1.5em}
+.club .club-consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;font-weight:600;color:var(--ink);line-height:1.45}
+.club .club-consent input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:var(--teal)}
+.club .club-consent a{color:var(--ink)}
+.club .club-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.club button:disabled{opacity:.7;cursor:wait}
 
 .about{max-width:900px;margin:0 auto;padding:0 24px 56px;text-align:center}
 .about p{margin:0;font-size:16px;line-height:1.65;color:var(--ink-2)}
@@ -202,7 +207,7 @@ footer.site{background:var(--ink);color:var(--cream)}
 
 <div class="promo">
   <span>Free printable for young pilots: download a SUM-IX mission sample</span>
-  <a href="#free">Get it free</a>
+  <a href="/mission/">Get it free</a>
 </div>
 
 <header class="site">
@@ -389,8 +394,8 @@ footer.site{background:var(--ink);color:var(--cream)}
 <section id="free" class="wrap" aria-labelledby="more-h">
   <h2 id="more-h" class="section-title">Discover more</h2>
   <div class="more-grid">
-    <a class="more" href="#club"><span class="ic bg-green"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></span><span class="t">Free printable missions</span><span class="b">Try a SUM-IX mission at home before the book arrives.</span><span class="c">Download →</span></a>
-    <a class="more" href="#club"><span class="ic bg-gold"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></span><span class="t">Pilot Certificate</span><span class="b">Finished the book? Print a personalised Master Pilot certificate.</span><span class="c">Get yours →</span></a>
+    <a class="more" href="/mission/"><span class="ic bg-green"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></span><span class="t">Free printable mission</span><span class="b">3 real activity pages from the book to try at home: math, logic and observation.</span><span class="c">Get it free →</span></a>
+    <a class="more" href="#books"><span class="ic bg-gold"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></span><span class="t">Pilot Certificate</span><span class="b">Finish every mission and scan the secret QR on the last page of the book to unlock it.</span><span class="c">See the book →</span></a>
     <a class="more" href="#characters"><span class="ic bg-cyan"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span><span class="t">Meet the five</span><span class="b">Five worlds, five skills, five unlikely friends. Who are you most like?</span><span class="c">Meet them →</span></a>
     <a class="more" href="#club"><span class="ic bg-purple"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l5-3v10l-5-3"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></span><span class="t">Wacky Worlds on video</span><span class="b">Animated stories and read-alongs are on their way.</span><span class="c">Coming soon →</span></a>
   </div>
@@ -400,16 +405,23 @@ footer.site{background:var(--ink);color:var(--cream)}
   <div class="club">
     <div style="flex:1 1 360px;min-width:0">
       <h2 id="club-h" class="section-title">Join the Pilot Club</h2>
-      <p>Free printable missions, a personalised Pilot Certificate and first news about new books. For grown-ups only. One email a month, no spam.</p>
+      <p>Start with a free printable SUM-IX mission, then get new free activities and first news about new books. For grown-ups only. No spam, ever.</p>
     </div>
-    <!-- TODO: connect this form to your email service (Mailchimp, MailerLite, Brevo...) by setting action="..." -->
-    <form id="club-form" novalidate>
+    <!-- Same Brevo double opt-in form as /mission ("Free Mission Web", list: Web - Free Mission) -->
+    <form id="club-form" method="POST" action="https://754aff81.sibforms.com/serve/MUIFAGFvqMMK9nIOeRPwzwze9qKkLa7SBcbkif1VjogNPTWzdL7yEZIEKeiyCwWylGg2JnKe_3YJqtuyVpybQTRXFf0U1htt80EnrtBzbz7F4U6u2uSO_dQqssim5hju-DrIomHRdmCglhavzWKVIC0fYeb7hLRXkI3uYt1ks8lPS_twrItmGUj0cs5E0Bj0d5zJ_QfvuZ5ZWhE-Qg==" novalidate>
       <label for="club-email">Parent's email</label>
       <div class="row">
-        <input id="club-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
-        <button type="submit">Sign me up</button>
+        <input id="club-email" name="EMAIL" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <button type="submit" id="club-submit">Send me the mission</button>
       </div>
-      <span class="note" id="club-note" role="status"></span>
+      <label class="club-consent">
+        <input type="checkbox" id="club-consent" name="OPT_IN" value="1" required>
+        <span>I'm a parent or guardian over 18 and I agree to receive emails from Wacky Worlds Books. I can unsubscribe anytime. <a href="/privacy/">Privacy policy</a>.</span>
+      </label>
+      <input type="text" name="email_address_check" value="" class="club-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="locale" value="en">
+      <input type="hidden" name="html_type" value="simple">
+      <span class="note" id="club-note" role="alert"></span>
     </form>
   </div>
 </section>
@@ -502,17 +514,20 @@ footer.site{background:var(--ink);color:var(--cream)}
     });
   });
 
-  // Newsletter placeholder until a real email service is connected
+  // Pilot Club: check the fields, then send them to Brevo (double opt-in, redirects to /mission/check-your-email/)
   var form = document.getElementById('club-form');
   var note = document.getElementById('club-note');
+  var clubBtn = document.getElementById('club-submit');
   form.addEventListener('submit', function (e) {
-    if (form.getAttribute('action')) return;
-    e.preventDefault();
     var email = document.getElementById('club-email');
-    note.textContent = email.checkValidity() && email.value
-      ? 'Sign-ups open very soon. Thanks for your patience, pilot!'
-      : 'Please enter a valid email address.';
+    var consent = document.getElementById('club-consent');
+    if (!email.value || !email.checkValidity()) { e.preventDefault(); note.textContent = 'Please enter a valid email address.'; email.focus(); return; }
+    if (!consent.checked) { e.preventDefault(); note.textContent = 'Please tick the box so we can email you.'; consent.focus(); return; }
+    note.textContent = '';
+    clubBtn.disabled = true;
+    clubBtn.textContent = 'Sending…';
   });
+  window.addEventListener('pageshow', function () { clubBtn.disabled = false; clubBtn.textContent = 'Send me the mission'; });
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();

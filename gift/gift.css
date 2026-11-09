@@ -73,6 +73,15 @@ main{flex:1}
 .btn-download:hover{color:var(--ink);transform:translateY(-1px)}
 .small-note{margin:0;font-size:14px;color:var(--muted)}
 
+/* Fan of three book pages (free mission sample) */
+.page-fan{position:relative;width:100%;max-width:460px;aspect-ratio:100/86;margin:0 auto}
+.page-fan img{position:absolute;top:6%;width:56%;height:auto;background:#fff;border-radius:6px;box-shadow:0 12px 28px rgba(14,74,71,.22)}
+.page-fan img:nth-child(1){left:0;transform:rotate(-8deg);z-index:1}
+.page-fan img:nth-child(2){left:22%;top:0;transform:rotate(1deg);z-index:3}
+.page-fan img:nth-child(3){right:0;transform:rotate(9deg);z-index:2}
+.skills{display:flex;flex-wrap:wrap;gap:8px}
+.skills span{font-size:13px;font-weight:800;padding:6px 12px;border-radius:999px;color:var(--ink)}
+
 /* Long-form text pages (privacy policy) */
 .prose{max-width:760px;margin:0 auto;padding:40px 24px 64px;font-size:16px;line-height:1.65;color:var(--ink-2)}
 .prose h2{margin:36px 0 8px;font-family:'Lilita One',sans-serif;font-weight:400;font-size:26px;line-height:1.15;color:var(--teal)}
