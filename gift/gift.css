@@ -1,5 +1,6 @@
 /* Shared styles for the /gift funnel pages. Same tokens as the home page. */
 :root{
+  color-scheme:only light;
   --ink:#1B1A17; --ink-2:#3A3833; --muted:#5A574F;
   --teal:#0E4A47; --cream:#F7EEDB; --paper:#FFFBF3; --line:#E6DCC6;
   --accent:#EE7B30; --yellow:#F2D45C;
