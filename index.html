@@ -222,6 +222,31 @@ html.motion .rv.in > *{opacity:1;transform:none;transition:opacity 450ms var(--e
 }
 @keyframes fade-in{from{opacity:0}to{opacity:1}}
 
+/* ---------- Peek inside (book page viewer) ---------- */
+html:has(.peek[open]){overflow:hidden}
+.peek{width:min(600px,94vw);max-width:94vw;max-height:94vh;padding:0;border:0;border-radius:24px;background:var(--paper);color:var(--ink);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.peek::backdrop{background:rgba(14,74,71,.78)}
+.peek[open]{animation:peek-in 260ms var(--ease-out)}
+.peek[open]::backdrop{animation:fade-in 260ms ease}
+@keyframes peek-in{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:none}}
+.peek-head{display:flex;align-items:center;gap:12px;padding:12px 12px 8px 20px}
+.peek-head h2{flex:1;margin:0;font-family:'Lilita One',sans-serif;font-weight:400;font-size:22px;color:var(--teal)}
+.peek-count{font-size:14px;font-weight:800;color:var(--muted)}
+.peek-close{width:44px;height:44px;border:0;border-radius:22px;background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 160ms var(--ease-out)}
+.peek-close:hover{background:var(--cream)}.peek-close:active{transform:scale(.92)}
+.peek-stage{position:relative}
+.peek-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;list-style:none;margin:0;padding:0;scrollbar-width:none;outline:none}
+.peek-track::-webkit-scrollbar{display:none}
+.peek-track li{flex:0 0 100%;scroll-snap-align:center;display:flex;justify-content:center;padding:0 16px}
+.peek-track img{display:block;aspect-ratio:760/984;height:auto;width:min(100%, calc((94vh - 150px) * 760 / 984), 587px);border-radius:8px;background:#fff;box-shadow:0 6px 18px rgba(14,74,71,.18)}
+.peek-nav{position:absolute;top:50%;width:44px;height:44px;margin-top:-22px;border:2px solid var(--ink);border-radius:22px;background:var(--paper);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 3px 0 var(--ink);transition:transform 120ms var(--ease-out),box-shadow 120ms var(--ease-out),opacity 160ms ease}
+.peek-nav.prev{left:8px}.peek-nav.next{right:8px}
+.peek-nav:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.peek-nav:disabled{opacity:0;pointer-events:none}
+.peek-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 20px 16px;font-size:14px;font-weight:700;color:var(--muted)}
+.peek-cta{font-size:15px;padding:10px 20px}
+@media (prefers-reduced-motion:reduce){.peek[open]{animation-name:fade-in}}
+
 @media (max-width:640px){
   .header-row{gap:12px}
   .header-row .logo{margin-bottom:-8px}
@@ -284,7 +309,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       <div class="ctas">
         <!-- TODO: replace # with your Amazon product link -->
         <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Get it on Amazon</a>
-        <a class="btn btn-outline" href="#missions">Peek inside</a>
+        <a class="btn btn-outline" href="#missions" id="peek-open" aria-haspopup="dialog">Peek inside</a>
       </div>
       <p class="facts">110 pages · 10 missions · 70 challenges · No screens needed</p>
     </div>
@@ -471,6 +496,39 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
 
 </main>
 
+<!-- Peek inside: 8 real pages of Book 01. Images load only when the viewer opens (data-src). -->
+<dialog class="peek" id="peek" aria-labelledby="peek-title">
+  <div class="peek-head">
+    <h2 id="peek-title">Peek inside Book 01</h2>
+    <span class="peek-count" id="peek-count" aria-live="polite">1 / 8</span>
+    <button type="button" class="peek-close" id="peek-close" aria-label="Close">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="peek-stage">
+    <button type="button" class="peek-nav prev" id="peek-prev" aria-label="Previous page">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <ul class="peek-track" id="peek-track" tabindex="0" aria-label="Book pages">
+      <li><img data-src="assets/peek/page-1.jpg" alt="Contents page listing the missions and their challenges" width="760" height="984"></li>
+      <li><img data-src="assets/peek/page-2.jpg" alt="Mission 1 title page: Wake the ship" width="760" height="984"></li>
+      <li><img data-src="assets/peek/page-3.jpg" alt="Activity: switch on the sleeping circuits" width="760" height="984"></li>
+      <li><img data-src="assets/peek/page-4.jpg" alt="Activity: find the hidden batteries on the grid" width="760" height="984"></li>
+      <li><img data-src="assets/peek/page-5.jpg" alt="Activity: fix the cracked solar panels with the right pieces" width="760" height="984"></li>
+      <li><img data-src="assets/peek/page-6.jpg" alt="Activity: find the lost hangar key" width="760" height="984"></li>
+      <li><img data-src="assets/peek/page-7.jpg" alt="Activity: complete SUM-IX's eye with the right piece" width="760" height="984"></li>
+      <li><img data-src="assets/peek/page-8.jpg" alt="Activity: help SUM-IX through the training course" width="760" height="984"></li>
+    </ul>
+    <button type="button" class="peek-nav next" id="peek-next" aria-label="Next page">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  <div class="peek-foot">
+    <span>110 pages · 10 missions · 70 challenges</span>
+    <a class="btn btn-primary peek-cta" href="#books">Get the book</a>
+  </div>
+</dialog>
+
 <footer class="site">
   <div class="wrap foot">
     <div class="foot-cols">
@@ -590,6 +648,45 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
     document.documentElement.classList.remove('motion');
   }
   window.__motionReady = true;
+
+  // Peek inside: native <dialog>, swipe via scroll-snap, arrows + keyboard; images load on first open
+  var peek = document.getElementById('peek');
+  var track = document.getElementById('peek-track');
+  var count = document.getElementById('peek-count');
+  var slides = track.querySelectorAll('li');
+  var opener = document.getElementById('peek-open');
+  function current() { return Math.round(track.scrollLeft / track.clientWidth); }
+  function go(i) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    track.scrollTo({ left: i * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  function update() {
+    var i = current();
+    count.textContent = (i + 1) + ' / ' + slides.length;
+    document.getElementById('peek-prev').disabled = i === 0;
+    document.getElementById('peek-next').disabled = i === slides.length - 1;
+  }
+  if (peek && typeof peek.showModal === 'function') {
+    opener.addEventListener('click', function (e) {
+      e.preventDefault();
+      track.querySelectorAll('img[data-src]').forEach(function (img) { img.src = img.getAttribute('data-src'); img.removeAttribute('data-src'); });
+      peek.showModal();
+      track.scrollLeft = 0; update();
+      track.focus({ preventScroll: true });
+    });
+    document.getElementById('peek-close').addEventListener('click', function () { peek.close(); });
+    document.getElementById('peek-prev').addEventListener('click', function () { go(current() - 1); });
+    document.getElementById('peek-next').addEventListener('click', function () { go(current() + 1); });
+    peek.addEventListener('click', function (e) { if (e.target === peek) peek.close(); }); // click on the dark backdrop
+    peek.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+    });
+    var t; track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(update, 60); });
+    peek.querySelector('.peek-cta').addEventListener('click', function () { peek.close(); });
+    peek.addEventListener('close', function () { opener.focus({ preventScroll: true }); });
+  }
 
   // Pilot Club: check the fields, then send them to Brevo (double opt-in, redirects to /mission/check-your-email/)
   var form = document.getElementById('club-form');
