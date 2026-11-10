@@ -21,6 +21,33 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/gift/gift.css">
+<style>
+.mail-actions{display:flex;flex-direction:column;gap:10px}
+.copy-btn{background:transparent;font-family:inherit;cursor:pointer;min-width:150px}
+.copy-btn.done{background:var(--teal);color:var(--cream)}
+.contact-form{background:#fff;border:2px solid var(--line);border-radius:24px;padding:28px;margin:8px 0 32px;scroll-margin-top:16px}
+.contact-form h2{margin-top:0}
+.contact-form form{display:flex;flex-direction:column;gap:16px}
+.contact-form .row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:16px}
+.contact-form label{display:flex;flex-direction:column;gap:6px;font-weight:800;font-size:15px;color:var(--ink)}
+.contact-form input,.contact-form textarea{width:100%;border:2px solid var(--ink);border-radius:12px;padding:12px 14px;font-size:16px;font-family:inherit;font-weight:400;background:var(--paper);color:var(--ink)}
+.contact-form input{height:52px}
+.contact-form textarea{resize:vertical;min-height:140px;line-height:1.5}
+.contact-form input:focus-visible,.contact-form textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.contact-form [aria-invalid="true"]{border-color:#A3301F}
+.contact-form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.contact-form .send-row{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
+.contact-form .send-row .btn{border:0;font-family:inherit;cursor:pointer;font-size:17px;padding:14px 28px}
+.contact-form .send-row .btn:disabled{opacity:.7;cursor:wait}
+.contact-form .small{margin:0;font-size:13px;color:var(--muted);flex:1 1 220px}
+.contact-form .note{margin:0;min-height:1.4em;font-size:14px;font-weight:700;color:#A3301F}
+.contact-form .sent{text-align:center;padding:12px 0}
+.contact-form .sent h3{margin:0 0 6px;font-family:'Lilita One',sans-serif;font-weight:400;font-size:30px;color:var(--teal)}
+.contact-form .sent p{margin:0}
+.contact-form .sent:not([hidden]){animation:rise-in 400ms var(--ease-out) both}
+.contact-form form[hidden],.contact-form .sent[hidden]{display:none}
+@media (max-width:640px){.contact-form{padding:20px}.mail-actions{flex-direction:row;flex-wrap:wrap}.mail-card .addr{font-size:clamp(17px,5.2vw,24px);word-break:normal}}
+</style>
 </head>
 <body>
 
@@ -43,11 +70,39 @@
     <div class="mail-card">
       <span class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
       <div style="flex:1 1 240px;min-width:0">
-        <div class="addr">hello@wackyworldsbooks.com</div>
+        <a class="addr" href="mailto:hello@wackyworldsbooks.com" style="text-decoration:none">hello@wackyworldsbooks.com</a>
         <p style="margin:4px 0 0">We usually reply within 2–3 working days.</p>
       </div>
-      <a class="btn btn-solid" href="mailto:hello@wackyworldsbooks.com">Write to us</a>
+      <div class="mail-actions">
+        <a class="btn btn-solid" href="#write">Write to us</a>
+        <button type="button" class="btn btn-outline copy-btn" id="copy-email" data-email="hello@wackyworldsbooks.com">Copy email</button>
+      </div>
     </div>
+
+    <section class="contact-form" id="write" aria-labelledby="write-h">
+      <h2 id="write-h">Send us a message</h2>
+      <!-- Sent through FormSubmit (formsubmit.co) to hello@wackyworldsbooks.com. The first message triggers an activation email that must be confirmed once. -->
+      <form id="contact-form" method="POST" action="https://formsubmit.co/hello@wackyworldsbooks.com" novalidate>
+        <div class="row2">
+          <label>Your name<input type="text" name="name" autocomplete="name" maxlength="80" required></label>
+          <label>Your email<input type="email" name="email" autocomplete="email" maxlength="120" required></label>
+        </div>
+        <label>Message<textarea name="message" rows="6" maxlength="3000" required placeholder="Questions, ideas, a mission report…"></textarea></label>
+        <input type="hidden" name="_subject" value="New message from wackyworldsbooks.com">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://wackyworldsbooks.com/contact/?sent=1#write">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="send-row">
+          <button type="submit" class="btn btn-solid" id="contact-send">Send message</button>
+          <p class="small">We only use your details to reply to you. See our <a href="/privacy/">privacy policy</a>.</p>
+        </div>
+        <p class="note" id="contact-note" role="status" aria-live="polite"></p>
+      </form>
+      <div class="sent" id="contact-sent" hidden>
+        <h3>Message sent! 🚀</h3>
+        <p>Thanks for writing. We'll get back to you within 2–3 working days.</p>
+      </div>
+    </section>
 
     <div class="mail-card">
       <span class="ic" style="background:var(--accent)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span>
@@ -86,5 +141,44 @@
     <a href="/privacy/">Privacy</a>
   </div>
 </footer>
+<script>
+(function () {
+  // Copy email
+  var copy = document.getElementById('copy-email');
+  copy.addEventListener('click', function () {
+    var email = copy.getAttribute('data-email');
+    function done() { copy.textContent = 'Copied!'; copy.classList.add('done'); setTimeout(function () { copy.textContent = 'Copy email'; copy.classList.remove('done'); }, 2000); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(email).then(done, function () { window.prompt('Copy this email:', email); });
+    else window.prompt('Copy this email:', email);
+  });
+
+  // Contact form: sent in the background so the visitor stays on the page
+  var form = document.getElementById('contact-form'), note = document.getElementById('contact-note');
+  var send = document.getElementById('contact-send'), sent = document.getElementById('contact-sent');
+  if (/[?&]sent=1/.test(location.search)) { form.hidden = true; sent.hidden = false; }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var bad = null;
+    ['name', 'email', 'message'].forEach(function (n) {
+      var f = form.elements[n], ok = f.value.trim() !== '' && f.checkValidity();
+      f.setAttribute('aria-invalid', ok ? 'false' : 'true');
+      if (!ok && !bad) bad = f;
+    });
+    if (bad) { note.textContent = bad.name === 'email' ? 'Please enter a valid email address.' : 'Please fill in your name, email and message.'; bad.focus(); return; }
+    if (form.elements._honey.value) return;
+    note.textContent = ''; send.disabled = true; send.textContent = 'Sending…';
+    var data = {};
+    ['name', 'email', 'message', '_subject', '_template', '_honey'].forEach(function (n) { data[n] = form.elements[n].value; });
+    fetch('https://formsubmit.co/ajax/hello@wackyworldsbooks.com', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data)
+    }).then(function (r) { return r.json(); }).then(function (res) {
+      if (String(res.success) === 'true') { form.hidden = true; sent.hidden = false; sent.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+      else throw new Error(res.message || 'error');
+    }).catch(function () {
+      note.innerHTML = 'Sorry, the message could not be sent. Please email us at <a href="mailto:hello@wackyworldsbooks.com">hello@wackyworldsbooks.com</a>.';
+    }).then(function () { send.disabled = false; send.textContent = 'Send message'; });
+  });
+})();
+</script>
 </body>
 </html>
