@@ -168,7 +168,9 @@
     if (form.elements._honey.value) return;
     note.textContent = ''; send.disabled = true; send.textContent = 'Sending…';
     var data = {};
-    ['name', 'email', 'message', '_subject', '_template', '_honey'].forEach(function (n) { data[n] = form.elements[n].value; });
+    ['name', 'email', 'message', '_template', '_honey'].forEach(function (n) { data[n] = form.elements[n].value; });
+    // A subject per sender, so Gmail keeps each visitor in their own conversation
+    data._subject = 'Message from ' + data.name.trim().slice(0, 60) + ' · wackyworldsbooks.com';
     fetch('https://formsubmit.co/ajax/hello@wackyworldsbooks.com', {
       method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data)
     }).then(function (r) { return r.json(); }).then(function (res) {
