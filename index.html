@@ -127,7 +127,7 @@ nav.main a:hover{background:rgba(255,255,255,.1);color:#fff}
 #books{padding-top:32px;padding-bottom:56px}
 .books-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
 .book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
-.book{background:#fff;border-radius:20px;border:2px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
+.book{background:#fff;border-radius:20px;border:2px solid var(--line);overflow:hidden;display:flex;flex-direction:column;transition:transform 200ms var(--ease-out),border-color 200ms ease,box-shadow 200ms var(--ease-out)}
 .book[hidden]{display:none}
 .thumb{position:relative;height:220px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .thumb img.cover{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
@@ -183,8 +183,11 @@ nav.main a:hover{background:rgba(255,255,255,.1);color:#fff}
 /* Discover */
 #free{padding-top:40px;padding-bottom:56px}
 .more-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-top:20px}
-.more{background:#fff;border:2px solid var(--line);border-radius:20px;padding:24px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:10px;min-height:200px;transition:transform .2s ease,border-color .2s ease}
-.more:hover{transform:translateY(-3px);border-color:var(--teal);color:var(--ink)}
+.more{background:#fff;border:2px solid var(--line);border-radius:20px;padding:24px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:10px;min-height:200px;transition:transform 200ms var(--ease-out),border-color 200ms ease,box-shadow 200ms var(--ease-out)}
+.more:hover{color:var(--ink)}
+@media (hover:hover) and (pointer:fine){
+  .more:hover,.book:hover{transform:translateY(-4px);border-color:var(--teal);box-shadow:0 14px 28px -10px rgba(14,74,71,.35)}
+}
 .more .ic{width:52px;height:52px;border-radius:14px;color:var(--ink);display:flex;align-items:center;justify-content:center}
 .more .t{font-family:'Lilita One',sans-serif;font-size:24px;line-height:1.1;color:var(--teal)}
 .more .b{font-size:15px;line-height:1.5;color:var(--ink-2)}
@@ -243,6 +246,7 @@ html.motion .rv > *{opacity:0;transform:translateY(16px)}
 html.motion .rv.in > *{opacity:1;transform:none;transition:opacity 450ms var(--ease-out),transform 450ms var(--ease-out);transition-delay:calc(var(--i,0) * 50ms)}
 @media (prefers-reduced-motion:reduce){
   .btn-primary:active{transform:none}
+  .more:hover,.book:hover{transform:none}
   .pop{animation-name:fade-in}
   html.motion .rv > *{transform:none}
 }
