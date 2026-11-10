@@ -214,6 +214,7 @@ footer.site{background:var(--ink);color:var(--cream)}
 .foot-brand p{margin:0;font-size:15px;color:#D9D1BF}
 .social{display:flex;gap:8px}
 .social a{width:44px;height:44px;border-radius:22px;background:#2E2C27;color:var(--cream);display:flex;align-items:center;justify-content:center}
+@media (hover:hover) and (pointer:fine){.social a:hover{background:var(--accent);color:var(--ink)}}
 .foot nav{flex:0 1 180px;display:flex;flex-direction:column;gap:10px}
 .foot nav .h{font-weight:800;font-size:14px;letter-spacing:.06em;color:var(--yellow)}
 .foot nav a{color:var(--cream);text-decoration:none;font-size:15px}
@@ -227,7 +228,7 @@ footer.site{background:var(--ink);color:var(--cream)}
 /* 1. Press feedback: the 3D buttons sink like a toy brick, the rest give a small squeeze */
 .btn-primary{transition:transform 120ms var(--ease-out),box-shadow 120ms var(--ease-out)}
 .btn-primary:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
-.shop-btn,.book .btn,.btn-outline,.feature .btn,.pill,.tab,.club button,.icon-btn,.social a{transition:transform 160ms var(--ease-out)}
+.shop-btn,.book .btn,.btn-outline,.feature .btn,.pill,.tab,.club button,.icon-btn,.social a{transition:transform 160ms var(--ease-out),background-color 160ms ease,color 160ms ease}
 .shop-btn:active,.book .btn:active,.btn-outline:active,.feature .btn:active,.pill:active,.tab:active,.club button:active,.icon-btn:active,.social a:active{transform:scale(.97)}
 .more:active{transform:translateY(-1px) scale(.99)}
 /* 2. Tab and filter swaps: the cards that appear rise in, one after another */
@@ -406,8 +407,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       <h1>SUM-IX and the Mystery of Pilot Zero</h1>
       <p class="lead">Brain games and challenging puzzles: logic, math and secret-code activities wrapped in one big space mission. Learning without pressure. Fun with purpose.</p>
       <div class="ctas">
-        <!-- TODO: replace # with your Amazon product link -->
-        <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Get it on Amazon</a>
+        <a class="btn btn-primary" href="https://www.amazon.com/dp/B0HR4Z1JHM" target="_blank" rel="noopener">Get it on Amazon</a>
         <a class="btn btn-outline" href="#missions" id="peek-open" aria-haspopup="dialog">Peek inside</a>
       </div>
       <p class="facts">110 pages · 10 missions · 80+ puzzles · No screens needed</p>
@@ -461,8 +461,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
         <span class="meta">BOOK 01 · AGES 6–8 · 110 PAGES</span>
         <h3><a href="/books/sum-ix/">SUM-IX and the Mystery of Pilot Zero</a></h3>
         <span class="price">$9.99 <span style="font-size:13px;font-weight:700;color:var(--muted)">paperback</span></span>
-        <!-- TODO: replace # with your Amazon product link -->
-        <a class="btn buy" href="#" target="_blank" rel="noopener">Buy on Amazon</a>
+        <a class="btn buy" href="https://www.amazon.com/dp/B0HR4Z1JHM" target="_blank" rel="noopener">Buy on Amazon</a>
       </div>
     </article>
     <article class="book" data-status="soon">
@@ -667,6 +666,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
         <img src="assets/logo.png" alt="Wacky Worlds" loading="lazy" width="180" height="56">
         <p>Stories and activity books where learning feels like play.</p>
         <div class="social">
+          <a href="https://www.instagram.com/wackyworldsbooks/" target="_blank" rel="noopener" aria-label="Wacky Worlds Books on Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
           <a href="/contact/" aria-label="Contact us by email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
         </div>
       </div>
@@ -842,6 +842,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       { t: 'For parents & teachers', d: 'How the book works, skills, tips and FAQ', u: '/for-parents/', kind: 'Page', i: ic(null, G, 'P'), k: 'parents teachers classroom school how it works skills tips learning age padres profesores maestros colegio' },
       { t: 'Join the Pilot Club', d: 'Free activities and news about new books', u: '#club', kind: 'Club', i: ic(null, O, '✉'), k: 'newsletter email sign up subscribe club news suscribirse correo novedades' },
       { t: 'Contact', d: 'hello@wackyworldsbooks.com', u: '/contact/', kind: 'Page', i: ic(null, Y, '@'), k: 'contact email help support question write contacto ayuda escribir' },
+      { t: 'Instagram', d: '@wackyworldsbooks', u: 'https://www.instagram.com/wackyworldsbooks/', kind: 'Social', i: ic(null, O, 'IG'), k: 'instagram insta social follow photos news redes sociales seguir' },
       { t: 'Crazy Space Academy', d: 'The school floating in the middle of the galaxy', u: '#academy', kind: 'Story', i: ic('assets/academy.jpg'), k: 'academy school space galaxy story world' },
       { t: 'Privacy & cookies', d: 'How we look after your data', u: '/privacy/', kind: 'Page', i: ic(null, T, 'i'), k: 'privacy policy cookies data gdpr unsubscribe' },
       { t: 'What age is it for?', d: 'Book 01 is designed for children aged 6 to 8', u: '/for-parents/', kind: 'FAQ', i: ic(null, T, '?'), k: 'age ages years old 5 6 7 8 9 kids edad anos ninos' },
