@@ -323,6 +323,12 @@ html:has(.peek[open]){overflow:hidden}
 .peek[open]{animation:peek-in 260ms var(--ease-out)}
 .peek[open]::backdrop{animation:fade-in 260ms ease}
 @keyframes peek-in{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:none}}
+.cert-dlg{width:min(860px,94vw);overflow-y:auto}
+.cert-dlg img{display:block;width:100%;height:auto;aspect-ratio:1600/989;object-fit:cover;background:var(--cream)}
+.cert-body{padding:16px 22px 22px;display:flex;flex-direction:column;gap:14px}
+.cert-body p{margin:0;font-size:16px;line-height:1.55;color:var(--ink-2)}
+.cert-ctas{display:flex;flex-wrap:wrap;gap:10px}
+html:has(.cert-dlg[open]){overflow:hidden}
 .peek-head{display:flex;align-items:center;gap:12px;padding:12px 12px 8px 20px}
 .peek-head h2{flex:1;margin:0;font-family:'Lilita One',sans-serif;font-weight:400;font-size:22px;color:var(--teal)}
 .peek-count{font-size:14px;font-weight:800;color:var(--muted)}
@@ -577,7 +583,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
   <h2 id="more-h" class="section-title">Discover more</h2>
   <div class="more-grid rv">
     <a class="more" href="/mission/"><span class="ic bg-green"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></span><span class="t">Free printable mission</span><span class="b">3 real activity pages from the book to try at home: math, logic and observation.</span><span class="c">Get it free →</span></a>
-    <a class="more" href="#books"><span class="ic bg-gold"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></span><span class="t">Pilot Certificate</span><span class="b">Finish every mission and scan the secret QR on the last page of the book to unlock it.</span><span class="c">See the book →</span></a>
+    <a class="more" href="assets/certificate-framed.jpg" id="cert-open" aria-haspopup="dialog"><span class="ic bg-gold"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></span><span class="t">Pilot Certificate</span><span class="b">Finish every mission and scan the secret QR on the last page of the book to unlock it.</span><span class="c">See the certificate →</span></a>
     <a class="more" href="/characters/"><span class="ic bg-cyan"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span><span class="t">Meet the five</span><span class="b">Five worlds, five skills, five unlikely friends. Who are you most like?</span><span class="c">Meet them →</span></a>
     <a class="more" href="#club"><span class="ic bg-purple"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l5-3v10l-5-3"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></span><span class="t">Wacky Worlds on video</span><span class="b">Animated stories and read-alongs are on their way.</span><span class="c">Coming soon →</span></a>
   </div>
@@ -646,6 +652,23 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
 </dialog>
 
 <!-- Peek inside: 8 real pages of Book 01. Images load only when the viewer opens (data-src). -->
+<!-- Pilot Certificate: framed example, opened from the "Discover more" card -->
+<dialog class="peek cert-dlg" id="cert" aria-labelledby="cert-title">
+  <div class="peek-head">
+    <h2 id="cert-title">Official Space Pilot Certificate</h2>
+    <button type="button" class="peek-close" id="cert-close" aria-label="Close">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <img id="cert-img" data-src="assets/certificate-framed.jpg" alt="A framed Official Space Pilot Certificate with the name Elena, standing on a sunny windowsill" width="1600" height="989">
+  <div class="cert-body">
+    <p>Finish all 10 missions, then scan the secret QR code on the last page of <strong>SUM-IX and the Mystery of Pilot Zero</strong>. Print the certificate, write your pilot's name and celebrate!</p>
+    <div class="cert-ctas">
+      <a class="btn btn-primary" href="/books/sum-ix/">See the book</a>
+      <a class="btn btn-outline" href="https://www.amazon.com/dp/B0HR4Z1JHM" target="_blank" rel="noopener">Get it on Amazon</a>
+    </div>
+  </div>
+</dialog>
 <dialog class="peek" id="peek" aria-labelledby="peek-title">
   <div class="peek-head">
     <h2 id="peek-title">Peek inside Book 01</h2>
@@ -1047,6 +1070,20 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
 })();
   // Phone menu: drop the right-edge fade once the menu is scrolled to its end
   (function () { var n = document.querySelector('nav.main'); if (!n) return; function f() { n.classList.toggle('at-end', n.scrollLeft + n.clientWidth >= n.scrollWidth - 4); } n.addEventListener('scroll', f, { passive: true }); window.addEventListener('resize', f); f(); })();
+  // Pilot Certificate card: opens the framed example (image loads only on first open)
+  (function () {
+    var open = document.getElementById('cert-open'), dlg = document.getElementById('cert');
+    if (!open || !dlg || typeof dlg.showModal !== 'function') return;
+    var img = document.getElementById('cert-img');
+    open.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (img.getAttribute('data-src')) { img.src = img.getAttribute('data-src'); img.removeAttribute('data-src'); }
+      dlg.showModal();
+    });
+    document.getElementById('cert-close').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', function () { open.focus({ preventScroll: true }); });
+  })();
   // Hero carousel: only the first picture loads with the page; the other five load once the page has finished
   // (or straight away if the visitor starts swiping). No autoplay.
   (function () {
