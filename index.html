@@ -13,7 +13,10 @@
 <meta name="description" content="Activity books and stories for curious kids. Meet SUM-IX, Lexi, Ollix, Astro and Arti at Crazy Space Academy: learning without pressure, fun with purpose.">
 <meta property="og:title" content="Wacky Worlds Books · Crazy Space Academy">
 <meta property="og:description" content="Brain games, puzzles and stories for kids 6–8. Learning without pressure. Fun with purpose.">
-<meta property="og:image" content="https://wackyworldsbooks.com/assets/hero-cover.jpg">
+<meta property="og:image" content="https://wackyworldsbooks.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:url" content="https://wackyworldsbooks.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,6 +45,7 @@ h2.section-title{margin:0;font-family:'Lilita One',sans-serif;font-weight:400;fo
 /* Promo + header */
 .promo{background:var(--ink);color:var(--cream);font-size:14px;font-weight:700;padding:10px 16px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;text-align:center}
 .promo a{color:var(--yellow)}
+.promo .short{display:none}
 header.site{background:var(--teal);color:var(--cream)}
 .header-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
 .header-row .logo{align-self:flex-start;margin-top:-12px;margin-bottom:-22px;position:relative;z-index:2}
@@ -126,7 +130,7 @@ nav.main a:hover{background:rgba(255,255,255,.1);color:#fff}
 .book{background:#fff;border-radius:20px;border:2px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
 .book[hidden]{display:none}
 .thumb{position:relative;height:220px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.thumb img.cover{width:100%;height:100%;object-fit:cover;object-position:48% 40%}
+.thumb img.cover{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
 .thumb img.sketch{width:150px;height:150px;object-fit:cover;border-radius:50%;border:5px solid #fff;background:#fff}
 .badge{position:absolute;top:12px;left:12px;font-size:12px;font-weight:800;padding:5px 10px;border-radius:999px;background:var(--paper);color:var(--ink)}
 .badge.dark{background:var(--ink);color:var(--cream)}
@@ -341,7 +345,22 @@ html:has(.peek[open]){overflow:hidden}
   .header-row{gap:12px}
   .header-row .logo{margin-bottom:-8px}
   .header-row .logo img{height:64px}
-  nav.main{order:3;flex-basis:100%}
+  .promo{padding:9px 12px;font-size:13px;gap:10px;flex-wrap:nowrap}
+  .promo .long{display:none}.promo .short{display:inline}
+  .header-row{row-gap:2px;padding-top:8px;padding-bottom:4px}
+  nav.main{order:3;flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:2px;-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}
+  nav.main::-webkit-scrollbar{display:none}
+  nav.main.at-end{-webkit-mask-image:none;mask-image:none}
+  nav.main a{flex:none;white-space:nowrap;font-size:15px;padding:10px 12px}
+  .shop-btn{padding:0 14px}
+  .foot nav{gap:2px}
+  .foot nav a{display:block;padding:10px 0}
+  .hero-row{padding-top:18px;padding-bottom:32px;gap:18px}
+  .hero-text{gap:12px}
+  .hero p.lead{font-size:17px;order:2}
+  .hero .facts{order:3}
+  .hero .book-more{order:4}
+  .hero-dots{margin-top:4px}
   .header-actions{margin-left:auto}
   .club{padding:28px 22px}
 }
@@ -356,7 +375,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="promo">
-  <span>Free printable for young pilots: download a SUM-IX mission sample</span>
+  <span class="long">Free printable for young pilots: download a SUM-IX mission sample</span><span class="short">Free printable SUM-IX mission</span>
   <a href="/mission/">Get it free</a>
 </div>
 
@@ -456,7 +475,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
   </div>
   <div class="book-grid rv" id="book-grid">
     <article class="book" data-status="out">
-      <div class="thumb bg-red"><img class="cover" src="assets/hero-cover.jpg" alt="Book 01 cover" loading="lazy"><a class="thumb-link" href="/books/sum-ix/" tabindex="-1" aria-hidden="true"></a><span class="badge dark">New</span><button type="button" class="fav" data-fav="b1" aria-pressed="false" aria-label="Add SUM-IX and the Mystery of Pilot Zero to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
+      <div class="thumb bg-red"><img class="cover" src="assets/book01-thumb.jpg" alt="Book 01 cover: SUM-IX and the Mystery of Pilot Zero" width="600" height="545" loading="lazy"><a class="thumb-link" href="/books/sum-ix/" tabindex="-1" aria-hidden="true"></a><span class="badge dark">New</span><button type="button" class="fav" data-fav="b1" aria-pressed="false" aria-label="Add SUM-IX and the Mystery of Pilot Zero to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
       <div class="book-body">
         <span class="meta">BOOK 01 · AGES 6–8 · 110 PAGES</span>
         <h3><a href="/books/sum-ix/">SUM-IX and the Mystery of Pilot Zero</a></h3>
@@ -534,7 +553,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
   <p class="sub">A closer look at the academy, and why parents love it.</p>
   <div class="feature-grid rv">
     <article id="parents" class="feature parents">
-      <img src="assets/hero-cover.jpg" alt="Hand-drawn puzzle sketches from the book" loading="lazy" style="object-position:10% 50%">
+      <img src="assets/hero/slide-2.jpg" alt="Hand-drawn puzzle sketches from the book" loading="lazy" style="object-position:8% 50%">
       <div class="in">
         <span class="kicker">FOR PARENTS</span>
         <h3>Learning without pressure</h3>
@@ -825,7 +844,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
     function ic(img, bg, txt) { return { img: img, bg: bg, txt: txt }; }
     var G = 'var(--green)', C = 'var(--cyan)', Y = 'var(--gold)', R = 'var(--red)', P = 'var(--purple)', O = 'var(--accent)', T = 'var(--cream)';
     var INDEX = [
-      { t: 'SUM-IX and the Mystery of Pilot Zero', d: 'Book 01 · ages 6–8 · 110 pages · $9.99 paperback', u: '/books/sum-ix/', kind: 'Book', i: ic('assets/hero-cover.jpg'), k: 'book 01 sumix sum ix robot buy amazon paperback price logic math secret codes brain games puzzles activity book new libro comprar precio' },
+      { t: 'SUM-IX and the Mystery of Pilot Zero', d: 'Book 01 · ages 6–8 · 110 pages · $9.99 paperback', u: '/books/sum-ix/', kind: 'Book', i: ic('assets/book01-thumb.jpg'), k: 'book 01 sumix sum ix robot buy amazon paperback price logic math secret codes brain games puzzles activity book new libro comprar precio' },
       { t: 'Lexi and the Treasure of the Crooked Quill', d: 'Book 02 · letters & words · coming soon', u: '#books', kind: 'Book', filter: 'soon', i: ic('assets/lexi.jpg'), k: 'book 02 coming soon next book lexi words letters' },
       { t: 'Ollix: the book of observation', d: 'Book 03 · in the works', u: '#books', kind: 'Book', filter: 'soon', i: ic('assets/ollix.jpg'), k: 'book 03 coming soon ollix observation' },
       { t: 'Astro: mazes & exploring', d: 'Book 04 · in the works', u: '#books', kind: 'Book', filter: 'soon', i: ic('assets/astro.jpg'), k: 'book 04 coming soon astro mazes maps' },
@@ -926,7 +945,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
   // Saved in this browser only (localStorage); nothing is sent anywhere.
   (function () {
     var BOOKS = {
-      b1: { t: 'SUM-IX and the Mystery of Pilot Zero', s: 'Book 01 · $9.99 paperback', img: 'assets/hero-cover.jpg', cover: true, out: true, bg: 'var(--red)' },
+      b1: { t: 'SUM-IX and the Mystery of Pilot Zero', s: 'Book 01 · $9.99 paperback', img: 'assets/book01-thumb.jpg', cover: true, out: true, bg: 'var(--red)' },
       b2: { n: 'Lexi', t: 'Lexi and the Treasure of the Crooked Quill', s: 'Book 02 · coming soon', img: 'assets/lexi.jpg', bg: 'var(--green)' },
       b3: { n: 'Ollix', t: 'Ollix: the book of observation', s: 'Book 03 · in the works', img: 'assets/ollix.jpg', bg: 'var(--cyan)' },
       b4: { n: 'Astro', t: 'Astro: mazes & exploring', s: 'Book 04 · in the works', img: 'assets/astro.jpg', bg: 'var(--gold)' },
@@ -1026,6 +1045,8 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
+  // Phone menu: drop the right-edge fade once the menu is scrolled to its end
+  (function () { var n = document.querySelector('nav.main'); if (!n) return; function f() { n.classList.toggle('at-end', n.scrollLeft + n.clientWidth >= n.scrollWidth - 4); } n.addEventListener('scroll', f, { passive: true }); window.addEventListener('resize', f); f(); })();
   // Hero carousel: only the first picture loads with the page; the other five load once the page has finished
   // (or straight away if the visitor starts swiping). No autoplay.
   (function () {
