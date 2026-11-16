@@ -132,7 +132,9 @@ nav.main a:hover{background:rgba(255,255,255,.1);color:#fff}
 .book[hidden]{display:none}
 .thumb{position:relative;height:220px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .thumb img.cover{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
-.thumb img.sketch{width:150px;height:150px;object-fit:cover;border-radius:50%;border:5px solid #fff;background:#fff}
+.thumb img.sketch{width:100%;height:100%;object-fit:cover;object-position:50% 0;transform:scale(1.32);transform-origin:50% 2%}
+.thumb img.sketch[src*="ollix"]{transform-origin:45% 2%}
+.thumb img.sketch[src*="arti"]{transform-origin:60% 0}
 .badge{position:absolute;top:12px;left:12px;font-size:12px;font-weight:800;padding:5px 10px;border-radius:999px;background:var(--paper);color:var(--ink)}
 .badge.dark{background:var(--ink);color:var(--cream)}
 .book-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
@@ -453,10 +455,10 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
   </div>
   <div id="panel-chars" role="tabpanel" aria-labelledby="tab-chars">
     <div class="char-grid rv">
-      <a class="char" href="/characters/#lexi"><span class="ring bg-green"><img src="assets/lexi.jpg" alt="Lexi the superhero reading frog" loading="lazy"></span><span class="name">Lexi</span><span class="skill">Letters &amp; words</span></a>
-      <a class="char" href="/characters/#ollix"><span class="ring bg-cyan"><img src="assets/ollix.jpg" alt="Ollix the many-eyed space octopus" loading="lazy"></span><span class="name">Ollix</span><span class="skill">Observation</span></a>
-      <a class="char" href="/characters/#astro"><span class="ring bg-gold"><img src="assets/astro.jpg" alt="Astro the pirate cosmonaut dog" loading="lazy"></span><span class="name">Astro</span><span class="skill">Mazes &amp; maps</span></a>
-      <a class="char" href="/characters/#sum-ix"><span class="ring bg-red"><img src="assets/sumix.jpg" alt="SUM-IX the number-loving robot" loading="lazy"></span><span class="name">SUM-IX</span><span class="skill">Numbers &amp; logic</span></a>
+      <a class="char" href="/characters/#lexi"><span class="ring bg-green"><img src="assets/lexi.jpg" alt="Lexi the explorer frog" loading="lazy"></span><span class="name">Lexi</span><span class="skill">Letters &amp; words</span></a>
+      <a class="char" href="/characters/#ollix"><span class="ring bg-cyan"><img src="assets/ollix.jpg" alt="Ollix the many-eyed octopus detective" loading="lazy"></span><span class="name">Ollix</span><span class="skill">Observation</span></a>
+      <a class="char" href="/characters/#astro"><span class="ring bg-gold"><img src="assets/astro.jpg" alt="Astro the pirate space dog" loading="lazy"></span><span class="name">Astro</span><span class="skill">Mazes &amp; maps</span></a>
+      <a class="char" href="/characters/#sum-ix"><span class="ring bg-red"><img src="assets/sumix.jpg" alt="SUM-IX the light-bulb robot" loading="lazy"></span><span class="name">SUM-IX</span><span class="skill">Numbers &amp; logic</span></a>
       <a class="char" href="/characters/#arti"><span class="ring bg-purple"><img src="assets/arti.jpg" alt="Arti the artist unicorn" loading="lazy"></span><span class="name">Arti</span><span class="skill">Colour &amp; creativity</span></a>
     </div>
   </div>
@@ -495,7 +497,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       </div>
     </article>
     <article class="book" data-status="soon">
-      <div class="thumb bg-green"><img class="sketch" src="assets/lexi.jpg" alt="Lexi sketch" loading="lazy"><a class="thumb-link" href="/characters/#lexi" tabindex="-1" aria-hidden="true"></a><span class="badge">Coming soon</span><button type="button" class="fav" data-fav="b2" aria-pressed="false" aria-label="Add Lexi and the Treasure of the Crooked Quill to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
+      <div class="thumb bg-green"><img class="sketch" src="assets/lexi.jpg" alt="Lexi the explorer frog" loading="lazy"><a class="thumb-link" href="/characters/#lexi" tabindex="-1" aria-hidden="true"></a><span class="badge">Coming soon</span><button type="button" class="fav" data-fav="b2" aria-pressed="false" aria-label="Add Lexi and the Treasure of the Crooked Quill to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
       <div class="book-body">
         <span class="meta">BOOK 02 · LETTERS &amp; WORDS</span>
         <h3><a href="/characters/#lexi">Lexi and the Treasure of the Crooked Quill</a></h3>
@@ -504,7 +506,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       </div>
     </article>
     <article class="book" data-status="soon">
-      <div class="thumb bg-cyan"><img class="sketch" src="assets/ollix.jpg" alt="Ollix sketch" loading="lazy"><a class="thumb-link" href="/characters/#ollix" tabindex="-1" aria-hidden="true"></a><span class="badge">In the works</span><button type="button" class="fav" data-fav="b3" aria-pressed="false" aria-label="Add Ollix: the book of observation to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
+      <div class="thumb bg-cyan"><img class="sketch" src="assets/ollix.jpg" alt="Ollix the many-eyed octopus detective" loading="lazy"><a class="thumb-link" href="/characters/#ollix" tabindex="-1" aria-hidden="true"></a><span class="badge">In the works</span><button type="button" class="fav" data-fav="b3" aria-pressed="false" aria-label="Add Ollix: the book of observation to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
       <div class="book-body">
         <span class="meta">BOOK 03 · OBSERVATION</span>
         <h3><a href="/characters/#ollix">Ollix: the book of observation</a></h3>
@@ -513,7 +515,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       </div>
     </article>
     <article class="book" data-status="soon">
-      <div class="thumb bg-gold"><img class="sketch" src="assets/astro.jpg" alt="Astro sketch" loading="lazy"><a class="thumb-link" href="/characters/#astro" tabindex="-1" aria-hidden="true"></a><span class="badge">In the works</span><button type="button" class="fav" data-fav="b4" aria-pressed="false" aria-label="Add Astro: mazes and exploring to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
+      <div class="thumb bg-gold"><img class="sketch" src="assets/astro.jpg" alt="Astro the pirate space dog" loading="lazy"><a class="thumb-link" href="/characters/#astro" tabindex="-1" aria-hidden="true"></a><span class="badge">In the works</span><button type="button" class="fav" data-fav="b4" aria-pressed="false" aria-label="Add Astro: mazes and exploring to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
       <div class="book-body">
         <span class="meta">BOOK 04 · MAZES &amp; MAPS</span>
         <h3><a href="/characters/#astro">Astro: mazes &amp; exploring</a></h3>
@@ -522,7 +524,7 @@ setTimeout(function () { if (!window.__motionReady) document.documentElement.cla
       </div>
     </article>
     <article class="book" data-status="soon">
-      <div class="thumb bg-purple"><img class="sketch" src="assets/arti.jpg" alt="Arti sketch" loading="lazy"><a class="thumb-link" href="/characters/#arti" tabindex="-1" aria-hidden="true"></a><span class="badge">In the works</span><button type="button" class="fav" data-fav="b5" aria-pressed="false" aria-label="Add Arti and Pompita: colour and creativity to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
+      <div class="thumb bg-purple"><img class="sketch" src="assets/arti.jpg" alt="Arti the artist unicorn" loading="lazy"><a class="thumb-link" href="/characters/#arti" tabindex="-1" aria-hidden="true"></a><span class="badge">In the works</span><button type="button" class="fav" data-fav="b5" aria-pressed="false" aria-label="Add Arti and Pompita: colour and creativity to my wishlist"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
       <div class="book-body">
         <span class="meta">BOOK 05 · CREATIVITY</span>
         <h3><a href="/characters/#arti">Arti &amp; Pompita: colour &amp; creativity</a></h3>
